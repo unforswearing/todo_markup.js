@@ -95,15 +95,17 @@ These are normal notes. A footnote will be added to the next line.
 
 Compiled file produces the following HTML formatted text by default:
 
-<div style="background-color: f6f6f6">
-See Footnote [<a id="src" href="#fnex">0</a>]
+```
+<div style="background-color: f0f0f0">
+See Footnote [<a id="fnsrc-0" href="#fn-0">0</a>]
 
 <details>
 <summary>Footnotes</summary>
-[<a href="#src" id="fnex">0</a>]: Footnotes are displayed within a details tag.
+<br />
+[<a id="fn-0" href="#src">0</a>]: Footnotes are displayed within a details tag.
 </details>
 </div>
-
+```
 
 <br />
 
