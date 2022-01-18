@@ -90,7 +90,7 @@ Compiled file produces the following HTML formatted text by default:
 See Footnote [<a id="src" href="#fnex">0</a>]
 
 <details>
-<summary>Footnotes</sumary>
+<summary>Footnotes</summary>
 [<a href="#src" id="fnex">0</a>]: Footnotes are displayed within a details tag.
 </details>
 
