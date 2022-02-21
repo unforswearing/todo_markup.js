@@ -13,7 +13,7 @@ Fair warning - I am a language nerd / self-taught programmer and this is an expe
 
 - Very simple syntax - 8 operators
 - Easy to remember, fast to type
-- Compiles to HTML by default
+- Compiles to standard HTML by default
 - Optionally generate an AST-like json object
 
 <br />
@@ -129,7 +129,7 @@ Callouts are used to highlight a specific line of text that is particularly impo
 
 <br />
 
-**Text and New Lines**
+**Text / New Lines**
 
 Regular text is returned from the compiler as-is.
 
@@ -140,7 +140,8 @@ The compiler tracks new lines to maintain the structure of the file when produci
 ## Future
 
 - Move footnotes to sit at the end of the previous line
-- Extract only tex from the file
-- Extract only tasks frome the file, organized by state
 - Add timestamps to completed tasks
+- New operators for abbreviations and definitions
+- Extract only text from the file
+- Extract only tasks frome the file, organized by state (in progress or done)
 - Maybe more stuff, I dunno

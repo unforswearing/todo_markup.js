@@ -1,30 +1,36 @@
 # todo.tdx test file
 
-= general to do items
+= General Information
 
 % this is a comment.
 % comments will be removed from script output
 
-regular notes look like this. they will be marked as "NOTE" by the parser. this note can be one long line or a series of individual lines. the point is that notes do not have a special operator preceeding the text like the other formatting options. 
+regular notes look like this. they will be marked as "TEXT" by the parser. this note can be one long line or a series of individual lines. the point is that notes do not have a special operator preceeding the text like the other formatting options. 
 
 todo_markup.js is for taking notes quickly during meetings or conferences, when there is only time to open a txt file or Google Doc (instead of juggling multiple apps). to keep things simple todo_markup.js does not have nested tasks, reminders, or calendar integration. 
 
-two task "states" instead of three: active an done. 
+= Task States
 
-= Sample Project
+two task "states" instead of three: active an done. any line of text could become a todo item by prepending ! or x
 
 a few sample tasks:
 
-! let georgia know that i will be late on monday
+! let georgia know that i will be late on monday 
+
+> the exclamation mark indicates the task is in progress.
+
 ! talk to steve about ^https://www.example.com
-! don't forget steve's birthday!
 
-and these tasks are done:
+> tasks can include urls, which are indicated using the caret operator. urls can be placed anywhere in the line. 
 
-x let melissa borrow your printer
+! don't forget steve's birthday! 
+
+completed tasks are indicated with an "x". these tasks are done:
+
+x let melissa borrow the company credit card
 x bring ice to the work bbq
 
-more complicated markup:
+= Additional Markup
 
 notes can have footnotes, though they always appear on their own line. 
 
