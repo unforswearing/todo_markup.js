@@ -140,9 +140,9 @@ The compiler tracks new lines to maintain the structure of the file when produci
 
 ## Future
 
-[x] Move footnotes to sit at the end of the previous line
-[ ] Add timestamps to completed tasks
-[ ] New operators for abbreviations and definitions
-[ ] Extract only text from the file
-[ ] Extract only tasks frome the file, organized by state (in progress or done)
-[?] Maybe more stuff, I dunno
+[x] Move footnotes to sit at the end of the previous line    
+[ ] Add timestamps to completed tasks    
+[ ] New operators for abbreviations and definitions   
+[ ] Extract only text from the file   
+[ ] Extract only tasks frome the file, organized by state (in progress or done)    
+[?] Maybe more stuff, I dunno   
