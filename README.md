@@ -4,17 +4,17 @@
 
 `todo_markup.js` is a terse replacement for markdown. The goals of this markup are
 
-- manage notes alongside tasks while also providing the ability to share current progress (currently defaults to compiled HTML).
-- reduce context switching between apps by storing tasks in the same document as notes.
+- Manage notes alongside tasks while
+- Providing the ability to share current progress (currently defaults to compiled HTML).
+- Reduce context switching between apps by storing tasks in the same document as notes.
 
-Fair warning - I am a language nerd / self-taught programmer and this is an experiment. I have read very little about compiler design, choosing instead to "just wing-it". Use with caution.
+Fair warning - I am a language nerd / self-taught programmer and this is an experiment. I have read very little about compiler design, choosing instead to "wing-it". Use with caution.
 
 **Features**
 
-- Very simple syntax - 8 operators
-- Easy to remember, fast to type
+- Syntax is only 8 operators
 - Compiles to standard HTML by default
-- Optionally generate an AST-like json object
+- Optionally generate an AST-like json object (soon)
 
 <br />
 
@@ -52,19 +52,20 @@ Sub-headings can be used to separate projects.
 
 **Incomplete Todo**
 
-Incomplete Todo items are prepended with an exclamation point.
+Incomplete Todo items are prepended with an exclamation point `!`. No need for square brackets `[]`
 
-> Note: todo_markup.js does not have an operator for pending or backlog type tasks to keep focused on current work. 
 
 ```
 ! This is an item that needs to be done
 ```
 
+> Note: todo_markup.js does not have an operator for pending or backlog type tasks to keep focused on current work. 
+
 <br />
 
 **Completed Todo**
 
-Completed Todos are indicated with an x.
+Completed Todos are indicated with an `x` before the todo title.
 
 ```
 x This item is complete!
@@ -74,8 +75,7 @@ x This item is complete!
 
 **Comments**
 
-Comments are marked with a percent sign %. All comments are removed from the compiled file. 
-
+Comments are marked with a percent sign `%`. All comments are removed from the compiled file. 
 
 ```
 % This is a comment about the current task, or anything else
@@ -85,7 +85,7 @@ Comments are marked with a percent sign %. All comments are removed from the com
 
 **Footnotes**
 
-Footnotes are indicated using the @ operator. Footnotes are collected at the bottom of the complied file. The footnote text is replaced with "See Footnote [num]" with a link leading to the footnote at the bottom of the file. 
+Footnotes are indicated using the 'at' sign '@'. Footnotes are collected at the bottom of the complied file. The footnote text is replaced with "See Footnote [num]" with a link leading to the footnote at the bottom of the file. 
 
 ```
 These are normal notes. A footnote will be added to the next line.
@@ -111,7 +111,7 @@ See Footnote [<a id="fnsrc-0" href="#fn-0">0</a>]
 
 **Urls**
 
-Bare urls can be linked using the carrot operator (^). Urls may appear in any other line regardless of other syntax on that line. 
+Bare urls can be linked using the carrot operator `^`. Urls may appear in any other line regardless of other syntax on that line. 
 
 ```
 It is important to check the file located at ^https://fileserver.com/important.txt for future updates.
@@ -124,7 +124,8 @@ It is important to check the file located at ^https://fileserver.com/important.t
 Callouts are used to highlight a specific line of text that is particularly important. Currently the callout is the only available text formatting option. Compiled callouts use the "mark" tag.
 
 ```
-> Please note: Callouts use the default yellow color supported by <mark>
+> Please note: Callouts use the default yellow color 
+> supported by the HTML `<mark>` tag
 ```
 
 <br />
@@ -139,9 +140,9 @@ The compiler tracks new lines to maintain the structure of the file when produci
 
 ## Future
 
-- Move footnotes to sit at the end of the previous line
-- Add timestamps to completed tasks
-- New operators for abbreviations and definitions
-- Extract only text from the file
-- Extract only tasks frome the file, organized by state (in progress or done)
-- Maybe more stuff, I dunno
+[x] Move footnotes to sit at the end of the previous line
+[ ] Add timestamps to completed tasks
+[ ] New operators for abbreviations and definitions
+[ ] Extract only text from the file
+[ ] Extract only tasks frome the file, organized by state (in progress or done)
+[?] Maybe more stuff, I dunno
