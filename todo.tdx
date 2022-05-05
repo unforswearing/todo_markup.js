@@ -38,8 +38,7 @@ notes can have footnotes, though they always appear on their own line.
 
 notes can also contain "callouts" which compile to the "mark" tag. 
 
-> this will be highlighted in yellow
-> use this for visual stress 
+> this will be highlighted in yellow. use this for visual stress 
 
 as seen above, urls can be linked using the "^" operator, like ^http://google.com or any other url. 
 

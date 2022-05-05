@@ -33,6 +33,7 @@ const INPUT_WORDS = words_tmp.flat()
 
 // each item should start the line -- no nested todo grammar. 
 // 	formatting will only apply to the first item found by the parser
+const LANG_OPERATORS = /(^x|^\@|^>|^\!|^\#|^\%|^\=|\^|\+)/
 const GRAMMAR = {
 	HEADER: /^\#/,
 	SUBHEAD: /^\=/,
@@ -42,15 +43,16 @@ const GRAMMAR = {
 	FOOTNOTE: /^\@/,
 	URL: /\^/,
 	CALLOUT: /^>/,
-	TEXT: /(?!(^x|^\@|^>|^\!|^\#|^\%|^\=|\^|\+))([aA-zZ0-9]+|\s+|'|"|\.)/,
+	TEXT: /(?!${LANG_OPERATORS})([aA-zZ0-9]+|\s+|'|"|\.)/,
 	NEWLINE: /(\n+|^.*$)/,
 };
 
 const GRAMMAR_KEYS = Object.keys(GRAMMAR)
 
 const emptyString = ' '.trim();
+// from the internet somewhere... need source
 const fullURL = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/
-const projectName = /\+([aA-zZ]+|[0-9]+)(?=\s)/;
+// const projectName = /\+([aA-zZ]+|[0-9]+)(?=\s)/;
 
 let fnTally = 0
 
@@ -64,9 +66,7 @@ let STATUS = {
 };
 
 const parseURL = (unit) => {
-	let fullURL = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/
-
-	let unitWords = unit.split(' ')
+let unitWords = unit.split(' ')
 	for (let g = 0; g < unitWords.length; g++) {
 		if (unitWords[g] && unitWords[g].match(fullURL)) {
 			let matched = unitWords[g].split('')
@@ -180,7 +180,7 @@ CACHE.push('</details>')
 let HTML_COLLECTOR = new Array()
 
 for (let entry = 0; entry < CACHE.length; entry++) {
-	if (CACHE[entry]) HTML_COLLECTOR.push(CACHE[entry])
+	if (CACHE[entry] !== "\n") HTML_COLLECTOR.push(CACHE[entry])
 }
 
 const AST = {...AST_COLLECTOR}
