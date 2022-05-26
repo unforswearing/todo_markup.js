@@ -145,4 +145,5 @@ The compiler tracks new lines to maintain the structure of the file when produci
 - Extract only text from the file (*in progress*)  
 - Extract all tasks from the file, organized by state (*in progress*)    
 - Syntax for admonitions (note, important, warning)  
-- Add the ability to use sytax elements as `TEXT`    
+- Add ability to highlight words, tentatively using `>words to emphasize<`
+- Add the ability to use sytax elements as regular text    
