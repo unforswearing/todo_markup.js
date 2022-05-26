@@ -42,7 +42,12 @@ const GRAMMAR = {
 	COMMENT: /^%/,
 	FOOTNOTE: /^\@/,
 	URL: /\^/,
-	CALLOUT: /^>/,
+  HIGHLIGHT: /^>/,
+  /*
+  ADWARNING: //,
+  ADNOTE: //,
+  ADIMPORTANT: //,
+  */
 	TEXT: /(?!${LANG_OPERATORS})([aA-zZ0-9]+|\s+|'|"|\.)/,
 	NEWLINE: /(\n+|^.*$)/,
 };
@@ -111,11 +116,21 @@ function TODO_INCOMPLETE(unit) {
 };
 function TODO_DONE(unit) {
 	if (!unit) return;
-	return `<del><input type="checkbox" checked>${parseURL(unit)}</input></del>`
+  let timestamp = new Date().toString().substring(0,21);
+	return `
+  <del>
+    <input type="checkbox" checked>${parseURL(unit)}</input>
+  </del>&nbsp;<code>${timestamp}</code>`
 };
-function CALLOUT(unit) {
+function HIGHLIGHT(unit) {
 	if (!unit) return;
 	return `<mark>${parseURL(unit)}</mark>`
+};
+function ADNOTE(unit) {
+};
+function ADWARNING(unit) {
+};
+function ADIMPORTANT(unit) {
 };
 function FOOTNOTE(unit) {
 	if (!unit) return;
@@ -138,7 +153,12 @@ const PARSER = {
 	'TODO_INCOMPLETE': TODO_INCOMPLETE,
 	'TODO_DONE': TODO_DONE,
 	'URL': URL,
-	'CALLOUT': CALLOUT,
+	'HIGHLIGHT': HIGHLIGHT,
+  /*
+  ADWARNING: ADWARNING,
+  ADNOTE: ADNOTE,
+  ADIMPORTANT: ADIMPORTANT,
+  */
 	'NEWLINE': NEWLINE,
 };
 

@@ -119,12 +119,12 @@ It is important to check the file located at ^https://fileserver.com/important.t
 
 <br />
 
-**Callouts**
+**Highlight**
 
-Callouts are used to highlight a specific line of text that is particularly important. Currently the callout is the only available text formatting option. Compiled callouts use the "mark" tag.
+Highlights are used to add emphasis a specific line of text that is particularly important. Currently the highlight is the only available text formatting option. Compiled highlights use the "mark" tag.
 
 ```
-> Please note: Callouts use the default yellow color 
+> Please note: Highlights use the default yellow color 
 > supported by the HTML `<mark>` tag
 ```
 
@@ -140,9 +140,9 @@ The compiler tracks new lines to maintain the structure of the file when produci
 
 ## Future
 
-[x] Move footnotes to sit at the end of the previous line    
-[ ] Add timestamps to completed tasks    
-[ ] New operators for abbreviations and definitions   
-[ ] Extract only text from the file   
-[ ] Extract only tasks frome the file, organized by state (in progress or done)    
-[?] Maybe more stuff, I dunno   
+- <strike>Move footnotes to sit at the end of the previous line</strike>
+- <strike>Add timestamps to completed tasks</strike>  
+- Extract only text from the file (*in progress*)  
+- Extract all tasks from the file, organized by state (*in progress*)    
+- Syntax for admonitions (note, important, warning)  
+- Add the ability to use sytax elements as `TEXT`    

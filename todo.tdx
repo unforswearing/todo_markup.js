@@ -17,7 +17,7 @@ a few sample tasks:
 
 ! let georgia know that i will be late on monday 
 
-> the exclamation mark indicates the task is in progress.
+> an exclamation mark "!" prepended to the task indicates the task is in progress.
 
 ! talk to steve about ^https://www.example.com
 
@@ -32,15 +32,15 @@ x bring ice to the work bbq
 
 = Additional Markup
 
-notes can have footnotes, though they always appear on their own line. 
+notes can have footnotes. the footnote will appear as a sequential number at the end of the line.
 
-@ this may be adjusted to use the preceeding line in the future. 
+@ compiled footnotes are moved to a "details" block at the end of the file. 
 
-notes can also contain "callouts" which compile to the "mark" tag. 
+notes can also contain highlights which compile to the "mark" tag. 
 
-> this will be highlighted in yellow. use this for visual stress 
+> this will be highlighted in yellow. use this for visual emphasis in lieu of strong or italicized text. 
 
-as seen above, urls can be linked using the "^" operator, like ^http://google.com or any other url. 
+as seen above, urls can be linked using the "^" operator, eg. ^http://google.com. 
 
 everything else is considered "TEXT" and is not processed. 
 
