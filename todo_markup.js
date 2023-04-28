@@ -166,6 +166,7 @@ const PARSER = {
   'NEWLINE': NEWLINE,
 };
 
+/* HTML output */
 // inputLoop:
 for (let n = 0; n < INPUT_LINES.length; n++) {
   let u = n === 0 ? n : n - 2;
@@ -214,8 +215,8 @@ const HTML = HTML_COLLECTOR.join('<p />')
 // option --all-tasks => incomplete + done
 
 
-// console.log(AST) // option --ast
-console.log(HTML) // default option
+console.log(AST) // option --ast
+// console.log(HTML) // default option
 
 
 
