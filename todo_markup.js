@@ -20,8 +20,8 @@ future options (to do):
         --comments
         --urls
 eventually:
-	todo_markup.js --ast "notes.json" (notes only AST)
-	todo_markup.js --preprocess "file.md" (convert to markdown i/o html where possible)
+  todo_markup.js --ast "notes.json" (notes only AST)
+  todo_markup.js --preprocess "file.md" (convert to markdown i/o html where possible)
 */
 
 // TODO: process args
@@ -32,7 +32,7 @@ const INPUT_LINES = INPUT_FILE.split('\n')
 
 let words_tmp = new Array()
 for (let v = 0; v < INPUT_LINES.length; v++) {
-	words_tmp.push(INPUT_LINES[v].split('\W'))
+  words_tmp.push(INPUT_LINES[v].split('\W'))
 }
 
 const INPUT_WORDS = words_tmp.flat()
@@ -41,21 +41,21 @@ const INPUT_WORDS = words_tmp.flat()
 // 	formatting will only apply to the first item found by the parser
 const LANG_OPERATORS = /(^x|^\@|^>|^\!|^\#|^\%|^\=|\^|\+)/
 const GRAMMAR = {
-	HEADER: /^\#/,
-	SUBHEAD: /^\=/,
-	TODO_INCOMPLETE: /^\!/,
-	TODO_DONE: /^x/,
-	COMMENT: /^%/,
-	FOOTNOTE: /^\@/,
-	URL: /\^/,
+  HEADER: /^\#/,
+  SUBHEAD: /^\=/,
+  TODO_INCOMPLETE: /^\!/,
+  TODO_DONE: /^x/,
+  COMMENT: /^%/,
+  FOOTNOTE: /^\@/,
+  URL: /\^/,
   HIGHLIGHT: /^>/,
   /* // Admonitions
   ADWARNING: //,
   ADNOTE: //,
   ADIMPORTANT: //,
   */
-	TEXT: /(?!${LANG_OPERATORS})([aA-zZ0-9]+|\s+|'|"|\.)/,
-	NEWLINE: /(\n+|^.*$)/,
+  TEXT: /(?!${LANG_OPERATORS})([aA-zZ0-9]+|\s+|'|"|\.)/,
+  NEWLINE: /(\n+|^.*$)/,
 };
 
 const GRAMMAR_KEYS = Object.keys(GRAMMAR)
@@ -72,63 +72,63 @@ let AST_COLLECTOR = new Array();
 let FOOTNOTES = new Array()
 let CACHE = new Array()
 let STATUS = {
-	TODO_INCOMPLETE: new Array(),
-	TODO_DONE: new Array()
+  TODO_INCOMPLETE: new Array(),
+  TODO_DONE: new Array()
 };
 const parseURL = (unit) => {
   let unitWords = unit.split(' ')
-	for (let g = 0; g < unitWords.length; g++) {
-		if (unitWords[g] && unitWords[g].match(fullURL)) {
-			let matched = unitWords[g].split('')
-			matched.shift()
-			unitWords[g] = PARSER.URL(matched.join(''))
-		}
-	}
-	return unitWords.join(' ')
+  for (let g = 0; g < unitWords.length; g++) {
+    if (unitWords[g] && unitWords[g].match(fullURL)) {
+      let matched = unitWords[g].split('')
+      matched.shift()
+      unitWords[g] = PARSER.URL(matched.join(''))
+    }
+  }
+  return unitWords.join(' ')
 }
 const astEntry = (grammarKey, regex, matchedLine) => {
-	AST_COLLECTOR.push({
-		key: grammarKey, re: regex, full_line: matchedLine.trim()
-	})
+  AST_COLLECTOR.push({
+    key: grammarKey, re: regex, full_line: matchedLine.trim()
+  })
 };
 
 function NEWLINE(unit) { return unit; };
 function URL(unit) {
-	if (!unit) return unit;
-	META.push({'URL': unit})
-	return `<a href="${unit}">${unit}</a>`
+  if (!unit) return unit;
+  META.push({ 'URL': unit })
+  return `<a href="${unit}">${unit}</a>`
 };
 function TEXT(unit) {
-	if (!unit) return '<br />';
-	return parseURL(unit); 
+  if (!unit) return '<br />';
+  return parseURL(unit);
 };
 function COMMENT(unit) {
-	META.push({'COMMENT': unit})
-	return emptyString;
+  META.push({ 'COMMENT': unit })
+  return emptyString;
 };
 function HEADER(unit) {
-	if (!unit) return;
-	return `<h1>${parseURL(unit)}</h1>`
+  if (!unit) return;
+  return `<h1>${parseURL(unit)}</h1>`
 };
 function SUBHEAD(unit) {
-	if (!unit) return;
-	return `<h2>${parseURL(unit)}</h2>`
+  if (!unit) return;
+  return `<h2>${parseURL(unit)}</h2>`
 };
 function TODO_INCOMPLETE(unit) {
-	if (!unit) return;
-	return `<input type="checkbox"> ${parseURL(unit)}</input>`;
+  if (!unit) return;
+  return `<input type="checkbox"> ${parseURL(unit)}</input>`;
 };
 function TODO_DONE(unit) {
-	if (!unit) return;
-  let timestamp = new Date().toString().substring(0,21);
-	return `
+  if (!unit) return;
+  let timestamp = new Date().toString().substring(0, 21);
+  return `
   <del>
     <input type="checkbox" checked>${parseURL(unit)}</input>
   </del>&nbsp;<code>${timestamp}</code>`
 };
 function HIGHLIGHT(unit) {
-	if (!unit) return;
-	return `<mark>${parseURL(unit)}</mark>`
+  if (!unit) return;
+  return `<mark>${parseURL(unit)}</mark>`
 };
 function ADNOTE(unit) {
 };
@@ -137,63 +137,63 @@ function ADWARNING(unit) {
 function ADIMPORTANT(unit) {
 };
 function FOOTNOTE(unit) {
-	if (!unit) return;
-	unit = parseURL(unit);
-	let fnTemplate = `<span id="fn-${fnTally}">
+  if (!unit) return;
+  unit = parseURL(unit);
+  let fnTemplate = `<span id="fn-${fnTally}">
 	<small>[<a href="#fnsrc-${fnTally}">${fnTally}</a>]: ${unit}</small>
 </span>`
-	FOOTNOTES.push(fnTemplate)
-	let footnoteHref = `<a id="fnsrc-${fnTally}" href="#fn-${fnTally}"><sup>${fnTally}</sup></a>`
-	fnTally++
-	return footnoteHref
+  FOOTNOTES.push(fnTemplate)
+  let footnoteHref = `<a id="fnsrc-${fnTally}" href="#fn-${fnTally}"><sup>${fnTally}</sup></a>`
+  fnTally++
+  return footnoteHref
 };
 
 const PARSER = {
-	'TEXT': TEXT,
-	'COMMENT': COMMENT,
-	'FOOTNOTE': FOOTNOTE,
-	'HEADER': HEADER,
-	'SUBHEAD': SUBHEAD,
-	'TODO_INCOMPLETE': TODO_INCOMPLETE,
-	'TODO_DONE': TODO_DONE,
-	'URL': URL,
-	'HIGHLIGHT': HIGHLIGHT,
+  'TEXT': TEXT,
+  'COMMENT': COMMENT,
+  'FOOTNOTE': FOOTNOTE,
+  'HEADER': HEADER,
+  'SUBHEAD': SUBHEAD,
+  'TODO_INCOMPLETE': TODO_INCOMPLETE,
+  'TODO_DONE': TODO_DONE,
+  'URL': URL,
+  'HIGHLIGHT': HIGHLIGHT,
   /*
   ADWARNING: ADWARNING,
   ADNOTE: ADNOTE,
   ADIMPORTANT: ADIMPORTANT,
   */
-	'NEWLINE': NEWLINE,
+  'NEWLINE': NEWLINE,
 };
 
 // inputLoop:
 for (let n = 0; n < INPUT_LINES.length; n++) {
-	let u = n === 0 ? n : n - 2;
-	let LINE = INPUT_LINES[n]
-	let PREV_LINE = INPUT_LINES[u]
-	let WORDS = LINE.split(' ')
-	wordsLoop:
-	for (let q = 0; q < WORDS.length; q++) {
-		if (WORDS[q].match(GRAMMAR.URL)) WORDS[q] = PARSER.URL(WORDS[q]);
-		let word = WORDS[0]
-		// grammarLoop:
-		for (let r = 0; r < GRAMMAR_KEYS.length; r++) {
-			let KEY = GRAMMAR_KEYS[r]
-			if (PARSER[KEY] && word.match(GRAMMAR[KEY])) {
-				if (KEY !== 'TEXT') WORDS.shift();
-				if (KEY === 'FOOTNOTE') {
-					CACHE[u] = PREV_LINE.trim() + PARSER[KEY](WORDS.join(' '))
-					astEntry(KEY, GRAMMAR[KEY], WORDS.join(' '))
-					break wordsLoop;
-				}
-			    if ((KEY === 'TODO_INCOMPLETE') || (KEY === 'TODO_DONE')) {
-			    	STATUS[KEY].push(WORDS.join(' '))
-			    }
-				CACHE.push(PARSER[KEY](WORDS.join(' ')))
-				break wordsLoop;
-			}
-		}
-	}
+  let u = n === 0 ? n : n - 2;
+  let LINE = INPUT_LINES[n]
+  let PREV_LINE = INPUT_LINES[u]
+  let WORDS = LINE.split(' ')
+  wordsLoop:
+  for (let q = 0; q < WORDS.length; q++) {
+    if (WORDS[q].match(GRAMMAR.URL)) WORDS[q] = PARSER.URL(WORDS[q]);
+    let word = WORDS[0]
+    // grammarLoop:
+    for (let r = 0; r < GRAMMAR_KEYS.length; r++) {
+      let KEY = GRAMMAR_KEYS[r]
+      if (PARSER[KEY] && word.match(GRAMMAR[KEY])) {
+        if (KEY !== 'TEXT') WORDS.shift();
+        if (KEY === 'FOOTNOTE') {
+          CACHE[u] = PREV_LINE.trim() + PARSER[KEY](WORDS.join(' '))
+          astEntry(KEY, GRAMMAR[KEY], WORDS.join(' '))
+          break wordsLoop;
+        }
+        if ((KEY === 'TODO_INCOMPLETE') || (KEY === 'TODO_DONE')) {
+          STATUS[KEY].push(WORDS.join(' '))
+        }
+        CACHE.push(PARSER[KEY](WORDS.join(' ')))
+        break wordsLoop;
+      }
+    }
+  }
 }
 
 CACHE.push('<hr />')
@@ -204,10 +204,10 @@ CACHE.push('</details>')
 let HTML_COLLECTOR = new Array()
 
 for (let entry = 0; entry < CACHE.length; entry++) {
-	if (CACHE[entry] !== "\n") HTML_COLLECTOR.push(CACHE[entry])
+  if (CACHE[entry] !== "\n") HTML_COLLECTOR.push(CACHE[entry])
 }
 
-const AST = {...AST_COLLECTOR}
+const AST = { ...AST_COLLECTOR }
 const HTML = HTML_COLLECTOR.join('<p />')
 // const INCOMPLETE = STATUS.TODO_INCOMPLETE // option --tasks 
 // const DONE = STATUS.TODO_DONE // option --completed
