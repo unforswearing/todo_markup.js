@@ -3,17 +3,23 @@ const fs = require('fs')
 /*
 todo_markup.js -- simplified markup for todo-focused notes
 
+NOTE: None of the options below has been implemented
+
 usage: 
-	todo_markup.js "file.md" (to html)
-	todo_markup.js --ast "file.md" (a basic AST-like structure of "file.md" contents)	
+  todo_markup.js <option> [outputfile] notesfile.tdx
 
-	shortly:
-	todo_markup.js --notes "notes.md"
-	todo_markup.js --tasks "tasks.md"
-	todo_markup.js --comments "tasks.md"
-	todo_markup.js --urls "tasks.md"
+  todo_markup.js compiled_notes.html notesfile.tdx
 
-	eventually:
+future options (to do):
+    todo_markup.js compiled_notes.html notesfile.tdx
+        --ast "file.md"
+        --notes
+        --incomplete
+        --done
+        --all-tasks 
+        --comments
+        --urls
+eventually:
 	todo_markup.js --ast "notes.json" (notes only AST)
 	todo_markup.js --preprocess "file.md" (convert to markdown i/o html where possible)
 */
@@ -43,7 +49,7 @@ const GRAMMAR = {
 	FOOTNOTE: /^\@/,
 	URL: /\^/,
   HIGHLIGHT: /^>/,
-  /*
+  /* // Admonitions
   ADWARNING: //,
   ADNOTE: //,
   ADIMPORTANT: //,
@@ -69,9 +75,8 @@ let STATUS = {
 	TODO_INCOMPLETE: new Array(),
 	TODO_DONE: new Array()
 };
-
 const parseURL = (unit) => {
-let unitWords = unit.split(' ')
+  let unitWords = unit.split(' ')
 	for (let g = 0; g < unitWords.length; g++) {
 		if (unitWords[g] && unitWords[g].match(fullURL)) {
 			let matched = unitWords[g].split('')
@@ -81,7 +86,6 @@ let unitWords = unit.split(' ')
 	}
 	return unitWords.join(' ')
 }
-
 const astEntry = (grammarKey, regex, matchedLine) => {
 	AST_COLLECTOR.push({
 		key: grammarKey, re: regex, full_line: matchedLine.trim()
@@ -205,10 +209,13 @@ for (let entry = 0; entry < CACHE.length; entry++) {
 
 const AST = {...AST_COLLECTOR}
 const HTML = HTML_COLLECTOR.join('<p />')
+// const INCOMPLETE = STATUS.TODO_INCOMPLETE // option --tasks 
+// const DONE = STATUS.TODO_DONE // option --completed
+// option --all-tasks => incomplete + done
 
-// console.log(AST, HTML, META)
-// console.log(AST)
-console.log(HTML)
+
+// console.log(AST) // option --ast
+console.log(HTML) // default option
 
 
 
