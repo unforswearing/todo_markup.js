@@ -180,11 +180,11 @@ for (let n = 0; n < INPUT_LINES.length; n++) {
     // grammarLoop:
     for (let r = 0; r < GRAMMAR_KEYS.length; r++) {
       let KEY = GRAMMAR_KEYS[r]
+      
       if (PARSER[KEY] && word.match(GRAMMAR[KEY])) {
         if (KEY !== 'TEXT') WORDS.shift();
         if (KEY === 'FOOTNOTE') {
           CACHE[u] = PREV_LINE.trim() + PARSER[KEY](WORDS.join(' '))
-          astEntry(KEY, GRAMMAR[KEY], WORDS.join(' '))
           break wordsLoop;
         }
         if ((KEY === 'TODO_INCOMPLETE') || (KEY === 'TODO_DONE')) {
