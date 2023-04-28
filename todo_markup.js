@@ -180,7 +180,7 @@ for (let n = 0; n < INPUT_LINES.length; n++) {
     // grammarLoop:
     for (let r = 0; r < GRAMMAR_KEYS.length; r++) {
       let KEY = GRAMMAR_KEYS[r]
-      
+      astEntry(KEY, GRAMMAR[KEY], WORDS.join(' '))
       if (PARSER[KEY] && word.match(GRAMMAR[KEY])) {
         if (KEY !== 'TEXT') WORDS.shift();
         if (KEY === 'FOOTNOTE') {
