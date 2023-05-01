@@ -4,17 +4,22 @@
 
 `todo_markup.js` is a terse replacement for markdown. The goals of this markup are
 
-- Manage notes alongside tasks while
-- Providing the ability to share current progress (currently defaults to compiled HTML).
+- Manage notes alongside tasks
+- Provide the ability to share current progress (currently defaults to HTML output).
 - Reduce context switching between apps by storing tasks in the same document as notes.
 
-Fair warning - I am a language nerd / self-taught programmer and this is an experiment. I have read very little about compiler design, choosing instead to "wing-it". Use with caution.
+Fair warning - I am a language nerd / self-taught programmer and this is an experiment for fun. Use with caution.
 
-**Features**
+## Features
 
 - Syntax is only 8 operators
-- Compiles to standard HTML by default
-- Optionally generate an AST-like json object (soon)
+- Output or save HTML by default
+- Output or save todo and complete items as separate or combined markdown file(s)
+
+## Todo 
+
+- Generate an AST-like json object
+- Output or save todo file as Markdown instead of HTML
 
 <br />
 
@@ -30,32 +35,31 @@ The syntax for todo_markup.js must adhere to the following rules:
 
 <br />
 
-**Heading**
+### Heading
 
 Top level headings are the same as markdown
 
-```
+```markdown
 # Here is a Document Title
 ```
 
 <br />
 
-**Sub-Heading**
+### Sub-Heading
 
 Sub-headings can be used to separate projects.
 
-```
+```txt
 = Example Project Name
 ```
 
 <br />
 
-**Incomplete Todo**
+### Incomplete Todo
 
 Incomplete Todo items are prepended with an exclamation point `!`. No need for square brackets `[]`
 
-
-```
+```txt
 ! This is an item that needs to be done
 ```
 
@@ -63,31 +67,31 @@ Incomplete Todo items are prepended with an exclamation point `!`. No need for s
 
 <br />
 
-**Completed Todo**
+### Completed Todo
 
 Completed Todos are indicated with an `x` before the todo title.
 
-```
+```txt
 x This item is complete!
 ```
 
 <br />
 
-**Comments**
+### Comments
 
 Comments are marked with a percent sign `%`. All comments are removed from the compiled file. 
 
-```
+```txt
 % This is a comment about the current task, or anything else
 ```
 
 <br />
 
-**Footnotes**
+### Footnotes
 
-Footnotes are indicated using the 'at' sign '@'. Footnotes are collected at the bottom of the complied file. The footnote text is replaced with "See Footnote [num]" with a link leading to the footnote at the bottom of the file. 
+Footnotes are indicated using the 'at' sign '@'. Footnotes are collected at the bottom of the complied file. The footnote text is replaced with `See Footnote [num]` with a link leading to the footnote at the bottom of the file. 
 
-```
+```txt
 These are normal notes. A footnote will be added to the next line.
 
 @ Footnotes are displayed within a details tag.
@@ -95,7 +99,7 @@ These are normal notes. A footnote will be added to the next line.
 
 Compiled file produces the following HTML formatted text by default:
 
-```
+```html
 <div style="background-color: f0f0f0">
 See Footnote [<a id="fnsrc-0" href="#fn-0">0</a>]
 
@@ -109,28 +113,28 @@ See Footnote [<a id="fnsrc-0" href="#fn-0">0</a>]
 
 <br />
 
-**Urls**
+### Urls
 
 Bare urls can be linked using the carrot operator `^`. Urls may appear in any other line regardless of other syntax on that line. 
 
-```
+```txt
 It is important to check the file located at ^https://fileserver.com/important.txt for future updates.
 ```
 
 <br />
 
-**Highlight**
+### Highlight
 
 Highlights are used to add emphasis a specific line of text that is particularly important. Currently the highlight is the only available text formatting option. Compiled highlights use the "mark" tag.
 
-```
+```markdown
 > Please note: Highlights use the default yellow color 
 > supported by the HTML `<mark>` tag
 ```
 
 <br />
 
-**Text / New Lines**
+### Text / New Lines
 
 Regular text is returned from the compiler as-is.
 
@@ -138,12 +142,3 @@ The compiler tracks new lines to maintain the structure of the file when produci
 
 <br />
 
-## Future
-
-- <strike>Move footnotes to sit at the end of the previous line</strike>
-- <strike>Add timestamps to completed tasks</strike>  
-- Extract only text from the file (*in progress*)  
-- Extract all tasks from the file, organized by state (*in progress*)    
-- Syntax for admonitions (note, important, warning)  
-- Add ability to highlight words, tentatively using `>words to emphasize<`
-- Add the ability to use sytax elements as regular text    

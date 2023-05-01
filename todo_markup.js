@@ -7,12 +7,11 @@ todo_markup.js -- simplified markup for todo-focused notes
 NOTE: None of the options below has been implemented
 
 usage: 
-  todo_markup.js <option> [outputfile] notesfile.tdx
+  todo_markup.js notesfile.tdx <option> [outputfile] 
 
-  todo_markup.js compiled_notes.html notesfile.tdx
+  eg. todo_markup.js notesfile.tdx compiled_notes.html
 
-future options (to do):
-    todo_markup.js compiled_notes.html notesfile.tdx
+future options:
         --ast "file.md"
         --notes
         --incomplete
@@ -20,14 +19,12 @@ future options (to do):
         --all-tasks 
         --comments
         --urls
-eventually:
-  todo_markup.js --ast "notes.json" (notes only AST)
-  todo_markup.js --preprocess "file.md" (convert to markdown i/o html where possible)
 */
 
 /*
 @todo look into using commander for option parsing - https://www.npmjs.com/package/commander
 @todo allow user provided file names for saved files
+@todo option to convert tdx file to markdown instead of html
 */
 
 // process.argv[2] will change when more arg options are added
@@ -45,11 +42,11 @@ for (let v = 0; v < INPUT_LINES.length; v++) {
   words_tmp.push(INPUT_LINES[v].split('\W'))
 }
 
-const INPUT_WORDS = words_tmp.flat()
+// const INPUT_WORDS = words_tmp.flat()
+// const LANG_OPERATORS = /(^x|^\@|^>|^\!|^\#|^\%|^\=|\^|\+)/
 
 // each item should start the line -- no nested todo grammar. 
 // 	formatting will only apply to the first item found by the parser
-const LANG_OPERATORS = /(^x|^\@|^>|^\!|^\#|^\%|^\=|\^|\+)/
 const GRAMMAR = {
   HEADER: /^\#/,
   SUBHEAD: /^\=/,
@@ -65,7 +62,6 @@ const GRAMMAR = {
 
 const GRAMMAR_KEYS = Object.keys(GRAMMAR)
 
-const emptyString = ' '.trim();
 // from the internet somewhere... need source
 const fullURL = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/
 // const projectName = /\+([aA-zZ]+|[0-9]+)(?=\s)/;
@@ -97,6 +93,8 @@ const astEntry = (grammarKey, regex, matchedLine) => {
     "key": grammarKey, "re": regex.toString(), "full_line": matchedLine.toString().trim()
   })
 };
+
+const emptyString = ' '.trim();
 
 function NEWLINE(unit) { return unit; };
 function URL(unit) {
