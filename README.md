@@ -2,7 +2,15 @@
 
 > A simple todo-focused markup for textual notes
 
-`todo_markup.js` is a terse replacement for markdown. The goals of this markup are
+`todo_markup.js` is for taking notes quickly during meetings or conferences, when there is only time to open a text file or Google Doc (instead of juggling multiple apps). To keep things simple `todo_markup.js` does not have nested tasks, reminders, or calendar integration. 
+
+See [todo.tdx](./todo.tdx) for an example of this markup. Test this file by cloning this repot and runing 
+
+```nodejs
+node todo_markup.js todo.tdx
+```
+
+## Goals
 
 - Manage notes alongside tasks
 - Provide the ability to share current progress (currently defaults to HTML output).
@@ -14,12 +22,13 @@ Fair warning - I am a language nerd / self-taught programmer and this is an expe
 
 - Syntax is only 8 operators
 - Output or save HTML by default
-- Output or save todo and complete items as separate or combined markdown file(s)
+- Output tasks as standalone markdown files.
+- Output other note elements (notes, urls, highlights, etc) as metadata.
 
 ## Todo 
 
 - Generate an AST-like json object
-- Output or save todo file as Markdown instead of HTML
+- Output or save full Todo file as Markdown instead of HTML
 
 <br />
 
