@@ -27,6 +27,7 @@ eventually:
 
 /*
 @todo look into using commander for option parsing - https://www.npmjs.com/package/commander
+@todo allow user provided file names for saved files
 */
 
 // process.argv[2] will change when more arg options are added
@@ -229,7 +230,7 @@ function md_incomplete() {
 
 // save incomplete items as incomplete.md
 function save_md_incomplete() {
-  fs.writeFileSync('incomplete.md', md_incomplete())
+  fs.writeFileSync(`${INPUT_META.stripped}_incomplete.md`, md_incomplete())
 }
 
 /* format done items into markdown list */
@@ -245,7 +246,7 @@ function md_done() {
 
 // save done items as done.md
 function save_md_done() {
-  fs.writeFileSync('done.md', md_done())
+  fs.writeFileSync(`${INPUT_META.stripped}_done.md`, md_done())
 }
 
 // option --all-tasks => incomplete + done
@@ -256,7 +257,7 @@ function md_all_tasks() {
 
 // save incomplete items as todo.md
 function save_all_tasks() {
-  fs.writeFileSync('todo.md', md_all_tasks())
+  fs.writeFileSync(`${INPUT_META.stripped}_todo.md`, md_all_tasks())
 }
 
 // console.log(JSON.stringify(AST_COLLECTOR)) // option --ast
