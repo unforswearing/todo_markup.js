@@ -49,11 +49,6 @@ const GRAMMAR = {
   FOOTNOTE: /^\@/,
   URL: /\^/,
   HIGHLIGHT: /^>/,
-  /* // Admonitions
-  ADWARNING: //,
-  ADNOTE: //,
-  ADIMPORTANT: //,
-  */
   TEXT: /(?!${LANG_OPERATORS})([aA-zZ0-9]+|\s+|'|"|\.)/,
   NEWLINE: /(\n+|^.*$)/,
 };
@@ -86,9 +81,10 @@ const parseURL = (unit) => {
   }
   return unitWords.join(' ')
 }
+
 const astEntry = (grammarKey, regex, matchedLine) => {
   AST_COLLECTOR.push({
-    key: grammarKey, re: regex, full_line: matchedLine.trim()
+    "key": grammarKey, "re": regex.toString(), "full_line": matchedLine.toString().trim()
   })
 };
 
@@ -130,12 +126,6 @@ function HIGHLIGHT(unit) {
   if (!unit) return;
   return `<mark>${parseURL(unit)}</mark>`
 };
-function ADNOTE(unit) {
-};
-function ADWARNING(unit) {
-};
-function ADIMPORTANT(unit) {
-};
 function FOOTNOTE(unit) {
   if (!unit) return;
   unit = parseURL(unit);
@@ -158,11 +148,6 @@ const PARSER = {
   'TODO_DONE': TODO_DONE,
   'URL': URL,
   'HIGHLIGHT': HIGHLIGHT,
-  /*
-  ADWARNING: ADWARNING,
-  ADNOTE: ADNOTE,
-  ADIMPORTANT: ADIMPORTANT,
-  */
   'NEWLINE': NEWLINE,
 };
 
@@ -208,17 +193,49 @@ for (let entry = 0; entry < CACHE.length; entry++) {
   if (CACHE[entry] !== "\n") HTML_COLLECTOR.push(CACHE[entry])
 }
 
-const AST = { ...AST_COLLECTOR }
+// const AST = { ...AST_COLLECTOR }
+
+/* output full document as html */
 const HTML = HTML_COLLECTOR.join('<p />')
-// const INCOMPLETE = STATUS.TODO_INCOMPLETE // option --tasks 
+
+/* format incomplete items into a markdown list */
+// const INCOMPLETE = STATUS.TODO_INCOMPLETE // option --tasks
+function md_incomplete() {
+  let INCOMPLETE = new Array();
+  STATUS.TODO_INCOMPLETE.forEach(item => {
+    INCOMPLETE.push(`- [ ] ${item}`)
+  })
+  const INCOMPLETE_FMT = INCOMPLETE.join('\n')
+  return INCOMPLETE_FMT;
+}
+
+// save incomplete items as incomplete.md
+// fs.writeFileSync('incomplete.md', md_incomplete())
+
+/* format done items into markdown list */
 // const DONE = STATUS.TODO_DONE // option --completed
+function md_done() {
+  let DONE = new Array();
+  STATUS.TODO_DONE.forEach(item => {
+    DONE.push(`- [x] ${item}`)
+  })
+  const DONE_FMT = DONE.join('\n')
+  return DONE_FMT;
+}
+// save done items as done.md
+// fs.writeFileSync('done.md', md_done())
+
 // option --all-tasks => incomplete + done
+function md_all_tasks() {
+  let alltasks = `${md_incomplete()}\n${md_done()}`
+  return alltasks;
+}
 
-
-console.log(AST) // option --ast
+// console.log(JSON.stringify(AST_COLLECTOR)) // option --ast
 // console.log(HTML) // default option
-
-
+// console.log(INCOMPLETE_FMT)
+// console.log(DONE_FMT)
+console.log(md_all_tasks())
 
 
 
