@@ -4,7 +4,7 @@
 
 `todo_markup.js` is for taking notes quickly during meetings or conferences, when there is only time to open a text file or Google Doc (instead of juggling multiple apps). To keep things simple `todo_markup.js` does not have nested tasks, reminders, or calendar integration. 
 
-See [todo.tdx](./todo.tdx) for an example of this markup. Test this file by cloning this repo and runing 
+See [todo.tdx](./todo.tdx) for an example of this markup. To use this script, clone the repo and run the following command: 
 
 ```nodejs
 node todo_markup.js todo.tdx
