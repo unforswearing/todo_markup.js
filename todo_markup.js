@@ -1,4 +1,5 @@
 const fs = require('fs')
+const path = require('path')
 
 /*
 todo_markup.js -- simplified markup for todo-focused notes
@@ -24,11 +25,19 @@ eventually:
   todo_markup.js --preprocess "file.md" (convert to markdown i/o html where possible)
 */
 
-// TODO: process args
+/*
+@todo look into using commander for option parsing - https://www.npmjs.com/package/commander
+*/
 
 // process.argv[2] will change when more arg options are added
 const INPUT_FILE = fs.readFileSync(process.argv[2], 'utf8')
 const INPUT_LINES = INPUT_FILE.split('\n')
+
+const INPUT_META = {
+  fullName: path.parse(process.argv[2]).base,
+  stripped: path.parse(process.argv[2]).name,
+  extension: path.parse(process.argv[2]).ext
+}
 
 let words_tmp = new Array()
 for (let v = 0; v < INPUT_LINES.length; v++) {
@@ -193,10 +202,19 @@ for (let entry = 0; entry < CACHE.length; entry++) {
   if (CACHE[entry] !== "\n") HTML_COLLECTOR.push(CACHE[entry])
 }
 
+// todo: ast is badly formatted, needs work
 // const AST = { ...AST_COLLECTOR }
 
 /* output full document as html */
-const HTML = HTML_COLLECTOR.join('<p />')
+function html_output() {
+  const HTML = HTML_COLLECTOR.join('<p />')
+  return HTML;
+}
+
+function save_html_output() {
+  // save html output to file
+  fs.writeFileSync(INPUT_META.stripped, html_output());
+}
 
 /* format incomplete items into a markdown list */
 // const INCOMPLETE = STATUS.TODO_INCOMPLETE // option --tasks
@@ -210,7 +228,9 @@ function md_incomplete() {
 }
 
 // save incomplete items as incomplete.md
-// fs.writeFileSync('incomplete.md', md_incomplete())
+function save_md_incomplete() {
+  fs.writeFileSync('incomplete.md', md_incomplete())
+}
 
 /* format done items into markdown list */
 // const DONE = STATUS.TODO_DONE // option --completed
@@ -222,8 +242,11 @@ function md_done() {
   const DONE_FMT = DONE.join('\n')
   return DONE_FMT;
 }
+
 // save done items as done.md
-// fs.writeFileSync('done.md', md_done())
+function save_md_done() {
+  fs.writeFileSync('done.md', md_done())
+}
 
 // option --all-tasks => incomplete + done
 function md_all_tasks() {
@@ -231,23 +254,14 @@ function md_all_tasks() {
   return alltasks;
 }
 
+// save incomplete items as todo.md
+function save_all_tasks() {
+  fs.writeFileSync('todo.md', md_all_tasks())
+}
+
 // console.log(JSON.stringify(AST_COLLECTOR)) // option --ast
 // console.log(HTML) // default option
 // console.log(INCOMPLETE_FMT)
 // console.log(DONE_FMT)
 console.log(md_all_tasks())
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
