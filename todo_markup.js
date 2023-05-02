@@ -4,8 +4,6 @@ const path = require('path')
 /*
 todo_markup.js -- simplified markup for todo-focused notes
 
-NOTE: None of the options below has been implemented
-
 usage: 
   todo_markup.js notesfile.tdx <option> [outputfile] 
 
@@ -19,9 +17,7 @@ future options:
         --all-tasks 
         --comments
         --urls
-*/
-
-/*
+*//*
 @todo look into using commander for option parsing - https://www.npmjs.com/package/commander
 @todo allow user provided file names for saved files
 @todo option to convert tdx file to markdown instead of html
