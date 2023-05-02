@@ -255,8 +255,8 @@ function save_all_tasks() {
 }
 
 // console.log(JSON.stringify(AST_COLLECTOR)) // option --ast
-// console.log(HTML) // default option
+console.log(html_output()) // default option
 // console.log(INCOMPLETE_FMT)
 // console.log(DONE_FMT)
-console.log(md_all_tasks())
+// console.log(md_all_tasks())
 
