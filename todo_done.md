@@ -1,0 +1,2 @@
+- [x] let melissa borrow the company credit card
+- [x] bring ice to the work bbq

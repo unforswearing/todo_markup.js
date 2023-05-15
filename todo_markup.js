@@ -276,7 +276,7 @@ function md_all_tasks() {
 // save incomplete items as todo.md
 function save_all_tasks(filename) {
   if (!filename) filename = INPUT_META.stripped;
-  fs.writeFileSync(`${filename}_todo.md`, md_all_tasks())
+  fs.writeFileSync(`${filename}_all_tasks.md`, md_all_tasks())
 }
 
 // console.log(JSON.stringify(AST_COLLECTOR)) // option --ast
@@ -314,7 +314,6 @@ switch (ARGUMENT) {
     }
     print(md_all_tasks());
     break;
-
   default:
     print("usage: todo_markup.js <todo_file> <argument> [output_file]")
     break;

@@ -1,0 +1,3 @@
+- [ ] let georgia know that i will be late on monday 
+- [ ] talk to steve about ^https://www.example.com
+- [ ] don't forget steve's birthday! 

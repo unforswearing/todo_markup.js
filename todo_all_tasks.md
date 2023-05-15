@@ -1,0 +1,5 @@
+- [ ] let georgia know that i will be late on monday 
+- [ ] talk to steve about ^https://www.example.com
+- [ ] don't forget steve's birthday! 
+- [x] let melissa borrow the company credit card
+- [x] bring ice to the work bbq
