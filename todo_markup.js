@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+// const { Command } = require('commander');
 
 /*
 todo_markup.js -- simplified markup for todo-focused notes
@@ -23,8 +24,28 @@ future options:
 @todo option to convert tdx file to markdown instead of html
 */
 
-// process.argv[2] will change when more arg options are added
-const INPUT_FILE = fs.readFileSync(process.argv[2], 'utf8')
+// arguments are captured via `process.argv`
+// argv[0] = node
+// argv[1] = todo_markup.js
+// argv[2:] = user arguments
+
+// get args without node and script name
+// const ARGS_ARRAY = [...process.argv]
+// const USER_ARGS = ARGS_ARRAY.splice(2)
+/*const AVAILABLE_ARGS = [
+  "--input", "--ast", "--notes", "--incomplete", "--done",
+  "--all-tasks", "--comments", "--urls", "--output"
+]*/
+
+const print = (str) => console.log(str);
+
+// accept a single argument for now. accept mutliple args later...
+// node todo_markup.js todo.tdx html out.html
+const INPUT = process.argv[2]
+const ARGUMENT = process.argv[3]
+const OUTPUT = process.argv[4]
+
+const INPUT_FILE = fs.readFileSync(INPUT, 'utf8')
 const INPUT_LINES = INPUT_FILE.split('\n')
 
 const INPUT_META = {
@@ -206,9 +227,10 @@ function html_output() {
   return HTML;
 }
 
-function save_html_output() {
+function save_html_output(filename) {
   // save html output to file
-  fs.writeFileSync(INPUT_META.stripped, html_output());
+  if (!filename) filename = INPUT_META.stripped;
+  fs.writeFileSync(filename, html_output());
 }
 
 /* format incomplete items into a markdown list */
@@ -223,8 +245,9 @@ function md_incomplete() {
 }
 
 // save incomplete items as incomplete.md
-function save_md_incomplete() {
-  fs.writeFileSync(`${INPUT_META.stripped}_incomplete.md`, md_incomplete())
+function save_md_incomplete(filename) {
+  if (!filename) filename = INPUT_META.stripped;
+  fs.writeFileSync(`${filename}_incomplete.md`, md_incomplete())
 }
 
 /* format done items into markdown list */
@@ -239,8 +262,9 @@ function md_done() {
 }
 
 // save done items as done.md
-function save_md_done() {
-  fs.writeFileSync(`${INPUT_META.stripped}_done.md`, md_done())
+function save_md_done(filename) {
+  if (!filename) filename = INPUT_META.stripped;
+  fs.writeFileSync(`${filename}_done.md`, md_done())
 }
 
 // option --all-tasks => incomplete + done
@@ -250,13 +274,48 @@ function md_all_tasks() {
 }
 
 // save incomplete items as todo.md
-function save_all_tasks() {
-  fs.writeFileSync(`${INPUT_META.stripped}_todo.md`, md_all_tasks())
+function save_all_tasks(filename) {
+  if (!filename) filename = INPUT_META.stripped;
+  fs.writeFileSync(`${filename}_todo.md`, md_all_tasks())
 }
 
 // console.log(JSON.stringify(AST_COLLECTOR)) // option --ast
-console.log(html_output()) // default option
+// console.log(html_output()) // default option
 // console.log(INCOMPLETE_FMT)
 // console.log(DONE_FMT)
 // console.log(md_all_tasks())
 
+switch (ARGUMENT) {
+  case "html":
+    if (OUTPUT) {
+      save_html_output(OUTPUT);
+      return;
+    }
+    print(html_output());
+    break;
+  case "incomplete":
+    if (OUTPUT) {
+      save_md_incomplete(OUTPUT);
+      return;
+    }
+    print(md_incomplete());
+    break;
+  case "done":
+    if (OUTPUT) {
+      save_md_done(OUTPUT);
+      return;
+    }
+    print(md_done());
+    break;
+  case "alltasks":
+    if (OUTPUT) {
+      save_all_tasks(OUTPUT);
+      return;
+    }
+    print(md_all_tasks());
+    break;
+
+  default:
+    print("usage: todo_markup.js <todo_file> <argument> [output_file]")
+    break;
+}
