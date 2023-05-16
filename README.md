@@ -33,7 +33,7 @@ git clone https://github.com/unforswearing/todo_markup.js.git
 cd todo_markup.js
 
 # print the help message
-node todo_markup.js
+node todo_markup.js help
 ```
 
 <br />
