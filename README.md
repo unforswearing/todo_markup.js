@@ -2,13 +2,9 @@
 
 > A simple todo-focused markup for textual notes
 
-`todo_markup.js` is for taking notes quickly during meetings or conferences, when there is only time to open a text file or Google Doc (instead of juggling multiple apps). To keep things simple `todo_markup.js` does not have nested tasks, reminders, or calendar integration. 
+`todo_markup.js` is for taking notes quickly during meetings or conferences, when there is only time to open a text file or Google Doc (instead of juggling multiple apps). To keep things simple `todo_markup.js` does not have nested tasks, reminders, or calendar integration.
 
-See [todo.tdx](./todo.tdx) for an example of this markup. To use this script, clone the repo and run the following command: 
-
-```nodejs
-node todo_markup.js todo.tdx
-```
+See [todo.tdx](./todo.tdx) for an example of this markup.
 
 ## Goals
 
@@ -18,6 +14,51 @@ node todo_markup.js todo.tdx
 
 Fair warning - I am a language nerd / self-taught programmer and this is an experiment for fun. Use with caution.
 
+## Installation
+
+```bash
+git clone https://github.com/unforswearing/todo_markup.js.git
+cd todo_markup.js
+
+# print the help message
+node todo_markup.js
+```
+
+## Usage
+
+There are currently three options for running `todo_markup.js` against your files:
+
+- Create HTML from a todo file
+
+```
+# the command below will print html to the console
+node todo_markup.js todo.tdx html
+
+# pass a filename to save the output
+node todo_markup.js todo.tdx html notes.html
+
+```
+
+- Output incomplete tasks as markdown
+
+```
+node todo_markup.js todo.tdx incomplete [outputfile]
+```
+
+- Output completed tasks as markdown
+
+```
+node todo_markup.js todo.tdx done [outputfile]
+```
+
+- Output all tasks as markdown
+
+```
+node todo_markup.js todo.tdx alltasks [outputfile]
+```
+
+Note: `outputfile` is optional for all available commands
+
 ## Features
 
 - Syntax is only 8 operators
@@ -25,7 +66,7 @@ Fair warning - I am a language nerd / self-taught programmer and this is an expe
 - Output tasks as standalone markdown files.
 - Output other note elements (notes, urls, highlights, etc) as metadata.
 
-## Todo 
+## Todo
 
 - Generate an AST-like json object
 - Output or save full Todo file as Markdown instead of HTML
@@ -72,7 +113,7 @@ Incomplete Todo items are prepended with an exclamation point `!`. No need for s
 ! This is an item that needs to be done
 ```
 
-> Note: todo_markup.js does not have an operator for pending or backlog type tasks to keep focused on current work. 
+> Note: todo_markup.js does not have an operator for pending or backlog type tasks to keep focused on current work.
 
 <br />
 
@@ -88,7 +129,7 @@ x This item is complete!
 
 ### Comments
 
-Comments are marked with a percent sign `%`. All comments are removed from the compiled file. 
+Comments are marked with a percent sign `%`. All comments are removed from the compiled file.
 
 ```txt
 % This is a comment about the current task, or anything else
@@ -98,7 +139,7 @@ Comments are marked with a percent sign `%`. All comments are removed from the c
 
 ### Footnotes
 
-Footnotes are indicated using the 'at' sign '@'. Footnotes are collected at the bottom of the complied file. The footnote text is replaced with `See Footnote [num]` with a link leading to the footnote at the bottom of the file. 
+Footnotes are indicated using the 'at' sign '@'. Footnotes are collected at the bottom of the complied file. The footnote text is replaced with `See Footnote [num]` with a link leading to the footnote at the bottom of the file.
 
 ```txt
 These are normal notes. A footnote will be added to the next line.
@@ -124,7 +165,7 @@ See Footnote [<a id="fnsrc-0" href="#fn-0">0</a>]
 
 ### Urls
 
-Bare urls can be linked using the carrot operator `^`. Urls may appear in any other line regardless of other syntax on that line. 
+Bare urls can be linked using the carrot operator `^`. Urls may appear in any other line regardless of other syntax on that line.
 
 ```txt
 It is important to check the file located at ^https://fileserver.com/important.txt for future updates.
@@ -137,7 +178,7 @@ It is important to check the file located at ^https://fileserver.com/important.t
 Highlights are used to add emphasis a specific line of text that is particularly important. Currently the highlight is the only available text formatting option. Compiled highlights use the "mark" tag.
 
 ```markdown
-> Please note: Highlights use the default yellow color 
+> Please note: Highlights use the default yellow color
 > supported by the HTML `<mark>` tag
 ```
 
@@ -147,6 +188,6 @@ Highlights are used to add emphasis a specific line of text that is particularly
 
 Regular text is returned from the compiler as-is.
 
-The compiler tracks new lines to maintain the structure of the file when producing the AST-like json file. 
+The compiler tracks new lines to maintain the structure of the file when producing the AST-like json file.
 
 <br />

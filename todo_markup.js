@@ -5,8 +5,8 @@ const path = require('path')
 /*
 todo_markup.js -- simplified markup for todo-focused notes
 
-usage: 
-  todo_markup.js notesfile.tdx <option> [outputfile] 
+usage:
+  todo_markup.js notesfile.tdx <option> [outputfile]
 
   eg. todo_markup.js notesfile.tdx compiled_notes.html
 
@@ -15,7 +15,7 @@ future options:
         --notes
         --incomplete
         --done
-        --all-tasks 
+        --all-tasks
         --comments
         --urls
 *//*
@@ -62,7 +62,7 @@ for (let v = 0; v < INPUT_LINES.length; v++) {
 // const INPUT_WORDS = words_tmp.flat()
 // const LANG_OPERATORS = /(^x|^\@|^>|^\!|^\#|^\%|^\=|\^|\+)/
 
-// each item should start the line -- no nested todo grammar. 
+// each item should start the line -- no nested todo grammar.
 // 	formatting will only apply to the first item found by the parser
 const GRAMMAR = {
   HEADER: /^\#/,
@@ -279,6 +279,10 @@ function save_all_tasks(filename) {
   fs.writeFileSync(`${filename}_all_tasks.md`, md_all_tasks())
 }
 
+function output_usage() {
+  print("usage: todo_markup.js <todo_file> <argument> [output_file]")
+}
+
 // console.log(JSON.stringify(AST_COLLECTOR)) // option --ast
 // console.log(html_output()) // default option
 // console.log(INCOMPLETE_FMT)
@@ -314,7 +318,10 @@ switch (ARGUMENT) {
     }
     print(md_all_tasks());
     break;
+  case "help"
+    output_usage();
+    break;
   default:
-    print("usage: todo_markup.js <todo_file> <argument> [output_file]")
+    output_usage()
     break;
 }
