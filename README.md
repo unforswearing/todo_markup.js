@@ -23,6 +23,7 @@ See [todo.tdx](./todo.tdx) for an example of this markup.
 - Output other elements to the console or file (notes, highlights, urls).
 - Generate an AST-like json object.
 - Output or save full Todo file as Markdown instead of HTML.
+- Come up with a name that is easier to type
 
 <br />
 
