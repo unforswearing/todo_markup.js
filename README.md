@@ -2,6 +2,8 @@
 
 > A simple todo-focused markup for textual notes
 
+<br />
+
 ## Why
 
 I am deeply interested in creating small markup and programming languages for fun. This markup was created for taking notes quickly during meetings or conferences, when there is only time to open a text file or Google Doc (instead of juggling multiple apps). To keep things simple `todo_markup.js` does not have nested tasks, reminders, or calendar integration.
