@@ -38,12 +38,18 @@ future options:
 ]*/
 
 const print = (str) => console.log(str);
+const usage = () => print("usage: todo_markup.js <todo_file> <argument> [output_file]");
 
 // accept a single argument for now. accept mutliple args later...
 // node todo_markup.js todo.tdx html out.html
 const INPUT = process.argv[2]
 const ARGUMENT = process.argv[3]
 const OUTPUT = process.argv[4]
+
+if (INPUT === "help") {
+  usage()
+  return
+}
 
 const INPUT_FILE = fs.readFileSync(INPUT, 'utf8')
 const INPUT_LINES = INPUT_FILE.split('\n')
@@ -279,10 +285,6 @@ function save_all_tasks(filename) {
   fs.writeFileSync(`${filename}_all_tasks.md`, md_all_tasks())
 }
 
-function output_usage() {
-  print("usage: todo_markup.js <todo_file> <argument> [output_file]")
-}
-
 // console.log(JSON.stringify(AST_COLLECTOR)) // option --ast
 // console.log(html_output()) // default option
 // console.log(INCOMPLETE_FMT)
@@ -318,10 +320,7 @@ switch (ARGUMENT) {
     }
     print(md_all_tasks());
     break;
-  case "help"
-    output_usage();
-    break;
   default:
-    output_usage()
+    usage();
     break;
 }

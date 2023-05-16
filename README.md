@@ -2,17 +2,29 @@
 
 > A simple todo-focused markup for textual notes
 
-`todo_markup.js` is for taking notes quickly during meetings or conferences, when there is only time to open a text file or Google Doc (instead of juggling multiple apps). To keep things simple `todo_markup.js` does not have nested tasks, reminders, or calendar integration.
+## Why
+
+I am deeply interested in creating small markup and programming languages for fun. This markup was created for taking notes quickly during meetings or conferences, when there is only time to open a text file or Google Doc (instead of juggling multiple apps). To keep things simple `todo_markup.js` does not have nested tasks, reminders, or calendar integration.
 
 See [todo.tdx](./todo.tdx) for an example of this markup.
 
-## Goals
+<br />
 
-- Manage notes alongside tasks
-- Provide the ability to share current progress (currently defaults to HTML output).
-- Reduce context switching between apps by storing tasks in the same document as notes.
+## Features
 
-Fair warning - I am a language nerd / self-taught programmer and this is an experiment for fun. Use with caution.
+- Syntax is only 8 operators.
+- Output or save HTML.
+- Output complete and / or incomplete tasks as standalone markdown files.
+
+<br />
+
+## Todo
+
+- Output other elements to the console or file (notes, highlights, urls).
+- Generate an AST-like json object.
+- Output or save full Todo file as Markdown instead of HTML.
+
+<br />
 
 ## Installation
 
@@ -24,13 +36,15 @@ cd todo_markup.js
 node todo_markup.js
 ```
 
+<br />
+
 ## Usage
 
 There are currently three options for running `todo_markup.js` against your files:
 
 - Create HTML from a todo file
 
-```
+```bash
 # the command below will print html to the console
 node todo_markup.js todo.tdx html
 
@@ -41,35 +55,23 @@ node todo_markup.js todo.tdx html notes.html
 
 - Output incomplete tasks as markdown
 
-```
+```bash
 node todo_markup.js todo.tdx incomplete [outputfile]
 ```
 
 - Output completed tasks as markdown
 
-```
+```bash
 node todo_markup.js todo.tdx done [outputfile]
 ```
 
 - Output all tasks as markdown
 
-```
+```bash
 node todo_markup.js todo.tdx alltasks [outputfile]
 ```
 
 Note: `outputfile` is optional for all available commands
-
-## Features
-
-- Syntax is only 8 operators
-- Output or save HTML by default
-- Output tasks as standalone markdown files.
-- Output other note elements (notes, urls, highlights, etc) as metadata.
-
-## Todo
-
-- Generate an AST-like json object
-- Output or save full Todo file as Markdown instead of HTML
 
 <br />
 
