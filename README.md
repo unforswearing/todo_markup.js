@@ -6,16 +6,19 @@
 
 ## Why
 
-I am deeply interested in creating small markup and programming languages for fun. This markup was created for taking notes quickly during meetings or conferences, when there is only time to open a text file or Google Doc (instead of juggling multiple apps). To keep things simple `todo_markup.js` does not have nested tasks, reminders, or calendar integration.
+I am deeply interested in creating small markup and programming languages for fun. This markup was created for taking notes quickly during meetings or conferences, when there is only time to open a text file or Google Doc (instead of juggling multiple apps). 
 
 See [todo.tdx](./todo.tdx) for an example of this markup.
+
+This markup is currently a replaement for [markdown](https://learnxinyminutes.com/docs/markdown/) however, `todo_markup.js` may eventually become a superset / extension for the markdown specification (likely targeting [commonmark](https://commonmark.org/)).
 
 <br />
 
 ## Features
 
 - Syntax is only 8 operators.
-- Output or save HTML.
+- The todo file is line based -- there is no nested todo grammar aside from URLs.
+- Output or save HTML from various options.
 - Output complete and / or incomplete tasks as standalone markdown files.
 - Generate an AST-like json object.
 

@@ -20,7 +20,6 @@ future options:
         --urls
 *//*
 @todo look into using commander for option parsing - https://www.npmjs.com/package/commander
-@todo allow user provided file names for saved files
 @todo option to convert tdx file to markdown instead of html
 */
 
@@ -93,6 +92,7 @@ let STATUS = {
   TODO_DONE: new Array()
 };
 let AST_COLLECTOR = {};
+// parseURL removes the caret char '^' from the start of urls
 const parseURL = (unit) => {
   let unitWords = unit.split(' ')
   for (let g = 0; g < unitWords.length; g++) {
@@ -275,15 +275,13 @@ function save_all_tasks(filename) {
   fs.writeFileSync(`${filename}_all_tasks.md`, md_all_tasks())
 }
 
-function output_ast() {
-
+function output_ast(filename) {
+  if (!filename) filename = `${INPUT_META.stripped}.json`;
+  fs.writeFileSync(`${filename}`, [AST_COLLECTOR])
 }
-// console.log(JSON.stringify(AST_COLLECTOR)) // option --ast
-// console.log(html_output()) // default option
-// console.log(INCOMPLETE_FMT)
-// console.log(DONE_FMT)
-// console.log(md_all_tasks())
 
+// parse arguments. eventually use a library for this, but 
+// dependency-free is strongly preferred. 
 switch (ARGUMENT) {
   case "html":
     if (OUTPUT) {
