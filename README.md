@@ -28,7 +28,8 @@ This markup is currently a replacement for [markdown](https://learnxinyminutes.c
 
 - Output other elements to the console or file (notes, highlights, urls).
 - Output or save full Todo file as Markdown instead of HTML.
-- Come up with a name that is easier to type
+- Minimal date parsing for incomplete tasks to indicate overdue items.
+- Come up with a name that is easier to type than `todo_markup.js` (maybe `tdjs`?).
 
 <br />
 
@@ -50,7 +51,7 @@ There are currently three options for running `todo_markup.js` against your file
 
 - Create HTML from a todo file
 
-```bash
+```txt
 # the command below will print html to the console
 node todo_markup.js todo.tdx html
 
@@ -61,25 +62,25 @@ node todo_markup.js todo.tdx html notes.html
 
 - Output incomplete tasks as markdown
 
-```bash
+```txt
 node todo_markup.js todo.tdx incomplete [outputfile]
 ```
 
 - Output completed tasks as markdown
 
-```bash
+```txt
 node todo_markup.js todo.tdx done [outputfile]
 ```
 
 - Output all tasks as markdown
 
-```bash
+```txt
 node todo_markup.js todo.tdx alltasks [outputfile]
 ```
 
 - Print a minimal [Abstract Syntax Tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree) for todo file
 
-```bash
+```txt
 node todo_markup.js todo.tdx ast
 ```
 
