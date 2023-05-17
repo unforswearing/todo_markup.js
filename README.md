@@ -74,6 +74,12 @@ node todo_markup.js todo.tdx done [outputfile]
 node todo_markup.js todo.tdx alltasks [outputfile]
 ```
 
+- Print a minimal [Abstract Syntax Tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree) for todo file
+
+```bash
+node todo_markup.js todo.tdx ast
+```
+
 Note: `outputfile` is optional for all available commands
 
 <br />

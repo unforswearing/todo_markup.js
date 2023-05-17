@@ -54,7 +54,7 @@ if (INPUT === "help") {
 const INPUT_FILE = fs.readFileSync(INPUT, 'utf8')
 const INPUT_LINES = INPUT_FILE.split('\n')
 
-const INPUT_META = {
+const FILE_META = {
   fullName: path.parse(process.argv[2]).base,
   stripped: path.parse(process.argv[2]).name,
   extension: path.parse(process.argv[2]).ext
@@ -64,9 +64,6 @@ let words_tmp = new Array()
 for (let v = 0; v < INPUT_LINES.length; v++) {
   words_tmp.push(INPUT_LINES[v].split('\W'))
 }
-
-// const INPUT_WORDS = words_tmp.flat()
-// const LANG_OPERATORS = /(^x|^\@|^>|^\!|^\#|^\%|^\=|\^|\+)/
 
 // each item should start the line -- no nested todo grammar.
 // 	formatting will only apply to the first item found by the parser
@@ -87,18 +84,15 @@ const GRAMMAR_KEYS = Object.keys(GRAMMAR)
 
 // from the internet somewhere... need source
 const fullURL = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/
-// const projectName = /\+([aA-zZ]+|[0-9]+)(?=\s)/;
-
-let fnTally = 0
 
 let META = new Array();
-let AST_COLLECTOR = new Array();
 let FOOTNOTES = new Array()
 let CACHE = new Array()
 let STATUS = {
   TODO_INCOMPLETE: new Array(),
   TODO_DONE: new Array()
 };
+let AST_COLLECTOR = {};
 const parseURL = (unit) => {
   let unitWords = unit.split(' ')
   for (let g = 0; g < unitWords.length; g++) {
@@ -110,12 +104,6 @@ const parseURL = (unit) => {
   }
   return unitWords.join(' ')
 }
-
-const astEntry = (grammarKey, regex, matchedLine) => {
-  AST_COLLECTOR.push({
-    "key": grammarKey, "re": regex.toString(), "full_line": matchedLine.toString().trim()
-  })
-};
 
 const emptyString = ' '.trim();
 
@@ -157,6 +145,7 @@ function HIGHLIGHT(unit) {
   if (!unit) return;
   return `<mark>${parseURL(unit)}</mark>`
 };
+let fnTally = 0
 function FOOTNOTE(unit) {
   if (!unit) return;
   unit = parseURL(unit);
@@ -182,7 +171,6 @@ const PARSER = {
   'NEWLINE': NEWLINE,
 };
 
-/* HTML output */
 // inputLoop:
 for (let n = 0; n < INPUT_LINES.length; n++) {
   let u = n === 0 ? n : n - 2;
@@ -196,7 +184,12 @@ for (let n = 0; n < INPUT_LINES.length; n++) {
     // grammarLoop:
     for (let r = 0; r < GRAMMAR_KEYS.length; r++) {
       let KEY = GRAMMAR_KEYS[r]
-      astEntry(KEY, GRAMMAR[KEY], WORDS.join(' '))
+      AST_COLLECTOR[n] = {
+        key: KEY,
+        regex: GRAMMAR[KEY],
+        line: LINE.trimEnd(),
+        url: LINE.match(fullURL) ? LINE.match(fullURL)[0] : false
+      }
       if (PARSER[KEY] && word.match(GRAMMAR[KEY])) {
         if (KEY !== 'TEXT') WORDS.shift();
         if (KEY === 'FOOTNOTE') {
@@ -224,9 +217,6 @@ for (let entry = 0; entry < CACHE.length; entry++) {
   if (CACHE[entry] !== "\n") HTML_COLLECTOR.push(CACHE[entry])
 }
 
-// todo: ast is badly formatted, needs work
-// const AST = { ...AST_COLLECTOR }
-
 /* output full document as html */
 function html_output() {
   const HTML = HTML_COLLECTOR.join('<p />')
@@ -235,7 +225,7 @@ function html_output() {
 
 function save_html_output(filename) {
   // save html output to file
-  if (!filename) filename = INPUT_META.stripped;
+  if (!filename) filename = FILE_META.stripped;
   fs.writeFileSync(filename, html_output());
 }
 
@@ -252,7 +242,7 @@ function md_incomplete() {
 
 // save incomplete items as incomplete.md
 function save_md_incomplete(filename) {
-  if (!filename) filename = INPUT_META.stripped;
+  if (!filename) filename = FILE_META.stripped;
   fs.writeFileSync(`${filename}_incomplete.md`, md_incomplete())
 }
 
@@ -269,7 +259,7 @@ function md_done() {
 
 // save done items as done.md
 function save_md_done(filename) {
-  if (!filename) filename = INPUT_META.stripped;
+  if (!filename) filename = FILE_META.stripped;
   fs.writeFileSync(`${filename}_done.md`, md_done())
 }
 
@@ -281,10 +271,13 @@ function md_all_tasks() {
 
 // save incomplete items as todo.md
 function save_all_tasks(filename) {
-  if (!filename) filename = INPUT_META.stripped;
+  if (!filename) filename = FILE_META.stripped;
   fs.writeFileSync(`${filename}_all_tasks.md`, md_all_tasks())
 }
 
+function output_ast() {
+
+}
 // console.log(JSON.stringify(AST_COLLECTOR)) // option --ast
 // console.log(html_output()) // default option
 // console.log(INCOMPLETE_FMT)
@@ -319,6 +312,9 @@ switch (ARGUMENT) {
       return;
     }
     print(md_all_tasks());
+    break;
+  case "ast":
+    print(AST_COLLECTOR)
     break;
   default:
     usage();
