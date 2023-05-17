@@ -10,7 +10,7 @@ I am deeply interested in creating small markup and programming languages for fu
 
 See [todo.tdx](./todo.tdx) for an example of this markup.
 
-This markup is currently a replaement for [markdown](https://learnxinyminutes.com/docs/markdown/) however, `todo_markup.js` may eventually become a superset / extension for the markdown specification (likely targeting [commonmark](https://commonmark.org/)).
+This markup is currently a replacement for [markdown](https://learnxinyminutes.com/docs/markdown/) however, `todo_markup.js` may eventually become a superset / extension for the markdown specification (likely targeting [commonmark](https://commonmark.org/)).
 
 <br />
 
