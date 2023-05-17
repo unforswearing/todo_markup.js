@@ -17,13 +17,13 @@ See [todo.tdx](./todo.tdx) for an example of this markup.
 - Syntax is only 8 operators.
 - Output or save HTML.
 - Output complete and / or incomplete tasks as standalone markdown files.
+- Generate an AST-like json object.
 
 <br />
 
 ## Todo
 
 - Output other elements to the console or file (notes, highlights, urls).
-- Generate an AST-like json object.
 - Output or save full Todo file as Markdown instead of HTML.
 - Come up with a name that is easier to type
 
