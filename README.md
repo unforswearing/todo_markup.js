@@ -57,7 +57,6 @@ node todo_markup.js todo.tdx html
 
 # pass a filename to save the output
 node todo_markup.js todo.tdx html notes.html
-
 ```
 
 - Output incomplete tasks as markdown

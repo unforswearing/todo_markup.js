@@ -7,37 +7,41 @@ todo_markup.js -- simplified markup for todo-focused notes
 
 usage:
   todo_markup.js notesfile.tdx <option> [outputfile]
-
   eg. todo_markup.js notesfile.tdx compiled_notes.html
 
-future options:
-        --ast "file.md"
-        --notes
-        --incomplete
-        --done
-        --all-tasks
-        --comments
-        --urls
+options:
+    ast "file.md" 
+    incomplete "file.md" 
+    done "file.md"
+    all-tasks "file.md"
+    notes "file.md"
+    comments "file.md"
+    urls "file.md"
 *//*
 @todo look into using commander for option parsing - https://www.npmjs.com/package/commander
 @todo option to convert tdx file to markdown instead of html
 */
 
-// arguments are captured via `process.argv`
-// argv[0] = node
-// argv[1] = todo_markup.js
-// argv[2:] = user arguments
-
-// get args without node and script name
-// const ARGS_ARRAY = [...process.argv]
-// const USER_ARGS = ARGS_ARRAY.splice(2)
-/*const AVAILABLE_ARGS = [
-  "--input", "--ast", "--notes", "--incomplete", "--done",
-  "--all-tasks", "--comments", "--urls", "--output"
-]*/
-
 const print = (str) => console.log(str);
-const usage = () => print("usage: todo_markup.js <todo_file> <argument> [output_file]");
+const usage = () => {
+  let usagetext = `
+todo_markup.js -- simplified markup for todo-focused notes
+
+usage:
+  todo_markup.js notesfile.tdx <option> [outputfile]
+  eg. todo_markup.js notesfile.tdx compiled_notes.html
+
+options:
+  incomplete "file.md" 
+  done "file.md"
+  alltasks "file.md"
+  notes
+  comments
+  urls
+  ast "file.md" 
+`
+  print(usagetext)
+};
 
 // accept a single argument for now. accept mutliple args later...
 // node todo_markup.js todo.tdx html out.html
@@ -115,6 +119,7 @@ function URL(unit) {
 };
 function TEXT(unit) {
   if (!unit) return '<br />';
+  META.push({ 'TEXT': unit })
   return parseURL(unit);
 };
 function COMMENT(unit) {
@@ -123,31 +128,37 @@ function COMMENT(unit) {
 };
 function HEADER(unit) {
   if (!unit) return;
+  META.push({ 'HEADER': unit })
   return `<h1>${parseURL(unit)}</h1>`
 };
 function SUBHEAD(unit) {
   if (!unit) return;
+  META.push({ 'SUBHEAD': unit })
   return `<h2>${parseURL(unit)}</h2>`
 };
 function TODO_INCOMPLETE(unit) {
   if (!unit) return;
+  META.push({ 'TODO_INCOMPLETE': unit })
   return `<input type="checkbox"> ${parseURL(unit)}</input>`;
 };
 function TODO_DONE(unit) {
   if (!unit) return;
+  META.push({ 'TODO_DONE': unit })
   let timestamp = new Date().toString().substring(0, 21);
   return `
   <del>
-    <input type="checkbox" checked>${parseURL(unit)}</input>
+  <input type="checkbox" checked>${parseURL(unit)}</input>
   </del>&nbsp;<code>${timestamp}</code>`
 };
 function HIGHLIGHT(unit) {
+  META.push({ 'HIGHLIGHT': unit })
   if (!unit) return;
   return `<mark>${parseURL(unit)}</mark>`
 };
 let fnTally = 0
 function FOOTNOTE(unit) {
   if (!unit) return;
+  META.push({ 'FOOTNOTE': unit })
   unit = parseURL(unit);
   let fnTemplate = `<span id="fn-${fnTally}">
 	<small>[<a href="#fnsrc-${fnTally}">${fnTally}</a>]: ${unit}</small>
@@ -275,9 +286,29 @@ function save_all_tasks(filename) {
   fs.writeFileSync(`${filename}_all_tasks.md`, md_all_tasks())
 }
 
-function output_ast(filename) {
-  if (!filename) filename = `${INPUT_META.stripped}.json`;
-  fs.writeFileSync(`${filename}`, [AST_COLLECTOR])
+function output_text() {
+  META.forEach(item => { item.TEXT && print(item.TEXT) });
+}
+
+function output_comments() {
+  META.forEach(item => { item.COMMENTS && print(item.COMMENTS) });
+}
+
+function output_urls() {
+  META.forEach(item => { item.URL && print(item.URL) });
+}
+
+function output_highlight() {
+  META.forEach(item => { item.HIGHLIGHT && print(item.HIGHLIGHT) });
+}
+
+function output_ast() {
+  return [AST_COLLECTOR]
+}
+
+function save_ast(filename) {
+  if (!filename) filename = `${FILE_META.stripped}.json`;
+  fs.writeFileSync(`${filename}`, AST_COLLECTOR)
 }
 
 // parse arguments. eventually use a library for this, but 
@@ -311,8 +342,24 @@ switch (ARGUMENT) {
     }
     print(md_all_tasks());
     break;
+  case "notes":
+    print(output_text())
+    break;
+  case "comments":
+    print(output_comments())
+    break;
+  case "urls":
+    print(output_urls())
+    break;
+  case "highlight":
+    print(output_highlight())
+    break;
   case "ast":
-    print(AST_COLLECTOR)
+    if (OUTPUT) {
+      save_ast(OUTPUT);
+      return;
+    }
+    print(output_ast());
     break;
   default:
     usage();
