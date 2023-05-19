@@ -13,7 +13,7 @@ options:
     ast "file.md" 
     incomplete "file.md" 
     done "file.md"
-    all-tasks "file.md"
+    alltasks "file.md"
     notes "file.md"
     comments "file.md"
     urls "file.md"
