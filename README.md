@@ -89,7 +89,7 @@ Note: `outputfile` is optional for all available commands
 
 ## Grammar
 
-The syntax for todo_markup.js must adhere to the following rules:
+When creating todo files for use with `todo_markup.js` you must adhere to the following rules:
 
 - All operators must be placed at the beginning of the line
 - Operators must be followed by a single space
