@@ -1,0 +1,91 @@
+html {
+  height: 100%;
+  width: 100%;
+  background-color: #f0f0f0;
+  color: #2a2f33;
+}
+
+body {
+  width: 70%;
+  padding: 40px;
+  padding-right: 0px;
+  padding-left: 120px;
+  background-color: #f0f0f0;
+  color: #2a2f33;
+  font-family: sans-serif;
+  font-weight: lighter;
+}
+
+div {
+  position: relative;
+  display: block;
+}
+
+h1,
+h2 {
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+  font-weight: bold;
+}
+
+button {
+  font-size: 0.4em;
+  border-radius: 0px;
+  border-width: 2px;
+  width: 100px;
+  height: 25px;
+  margin-bottom: 10px;
+  margin-right: 5px;
+  border-top: 0px;
+  border-right: 0px;
+  border-bottom: 0px;
+  background-color: #7cadfc;
+}
+
+code {
+  font-size: 0.8em;
+  background-color: #fac8d8;
+  border-radius: 5px;
+}
+
+details {
+  padding-bottom: 10px;
+}
+
+#content {
+  height: 300px;
+  max-width: 95%;
+  min-width: 95%;
+  /*position: absolute;
+  float: left;
+  margin-right: 10px;*/
+  border-width: 2px;
+  margin-bottom: 10px;
+  overflow-y: scroll;
+  background-color: #fea;
+  font-family: monospace;
+  font-size: 0.8em;
+  padding: 10px;
+}
+
+#example {
+  background-color: #ff4a4a;
+}
+
+#clear {
+  background-color: #80f2c5;
+}
+
+#description {
+  display: block;
+  max-width: 95%;
+  min-width: 95%;
+  overflow-x: visible;
+}
+
+#result {
+  max-width: 95%;
+  min-width: 95%;
+  font-size: 0.8em;
+  overflow-x: visible;
+}

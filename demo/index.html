@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>replit</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div id="description">
+      <h1>ToDoMarkup.js Demo</h1>
+      <br />
+      This page is a simple demonstration of <a
+        href="https://github.com/unforswearing/todo_markup.js"><code>todo_markup.js</code></a>.
+      Click the "Example" button or enter text in the yellow editor below to get started.
+      Generate markup by clicking one of the action buttons -- the generated markup
+      will appear in the "Result" section below.
+    </div>
+    <p />
+    </p>
+    <div style="overflow-x: visible;">
+      <button id="example" onclick="placeholder()">example</button>
+      <button id="clear" onclick="reset()">clear</button>
+    </div>
+    <div style="overflow-x: visible;">
+      <button onclick="todomarkup('html')">html</button>
+      <button onclick="todomarkup('incomplete')">incomplete</button>
+      <button onclick="todomarkup('done')">done</button>
+      <button onclick="todomarkup('alltasks')">all tasks</button>
+      <button onclick="todomarkup('notes')">notes</button>
+      <button onclick="todomarkup('comments')">comments</button>
+      <button onclick="todomarkup('urls')">urls</button>
+      <button onclick="todomarkup('highlight')">highlights</button>
+      <button onclick="todomarkup('ast')">ast</button>
+    </div>
+    <br />
+    <div id="content" class="content" contenteditable=true></div>
+    <br />
+    <h2 id="result_header">Result:</h2>
+    <hr />
+    <div id="result"></div>
+    <script src="script.js"></script>
+  </body>
+
+</html>
