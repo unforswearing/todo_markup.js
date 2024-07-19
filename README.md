@@ -6,9 +6,7 @@
 
 ## Why
 
-I am deeply interested in creating small markup and programming languages for fun. This markup was created for taking notes quickly during meetings or conferences, when there is only time to open a text file or Google Doc (instead of juggling multiple apps). 
-
-See [todo.tdx](./todo.tdx) for an example of this markup.
+I am deeply interested in creating small markup and programming languages for fun. This markup was created for taking notes quickly during meetings or conferences, when there is only time to open a text file or Google Doc (instead of juggling multiple apps).
 
 This markup is currently a replacement for [markdown](https://learnxinyminutes.com/docs/markdown/) however, `todo_markup.js` may eventually become a superset / extension for the markdown specification (likely targeting [commonmark](https://commonmark.org/)).
 
@@ -21,6 +19,11 @@ This markup is currently a replacement for [markdown](https://learnxinyminutes.c
 - Output or save HTML from various options.
 - Output complete and / or incomplete tasks as standalone markdown files.
 - Generate an AST-like json object.
+
+
+See [todo.tdx](./todo.tdx) for an example of this markup.
+
+You can use the [demo app](https://www.unforswearing.com/todo_markup/) to test the markup in a live environment.
 
 <br />
 
