@@ -59,6 +59,8 @@ node todo_markup.js help
 > [!NOTE]
 > `[outputfile]` is optional for all available commands.
 
+<br />
+
 - Create HTML from a todo file
 
 ```bash
@@ -135,6 +137,8 @@ Sub-headings can be used to separate projects.
 > [!NOTE]
 > `todo_markup.js` does not have an operator for pending or backlog type tasks to keep focused on current work.
 
+<br />
+
 Incomplete Todo items are prepended with an exclamation point `!`. No need for square brackets `[]`
 
 ```txt
@@ -177,11 +181,13 @@ Compiled file produces the following HTML formatted text by default:
 
 ```html
 <div style="background-color: f0f0f0">
+
   See Footnote [<a id="fnsrc-0" href="#fn-0">0</a>]
 
   <details>
 
     <summary>Footnotes</summary>
+
     <br />
 
     [<a id="fn-0" href="#src">0</a>]: Footnotes are displayed within a details tag.
