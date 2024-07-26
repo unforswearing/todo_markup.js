@@ -34,7 +34,7 @@ See [todo.tdx](./todo.tdx) for an example of this markup.
 
 ## To Do / Roadmap
 
-See [Issues](/issues) for planned features and fixes
+See [Issues](https://github.com/unforswearing/todo_markup.js/issues) for planned features and fixes
 
 <br />
 
