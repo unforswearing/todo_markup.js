@@ -45,11 +45,11 @@ You can use the [demo app](https://www.unforswearing.com/todo_markup/) to test t
 Clone this repository if you would like to install `todo_markup.js` on your system:
 
 ```console
-git clone https://github.com/unforswearing/todo_markup.js.git
-cd todo_markup.js
+$ git clone https://github.com/unforswearing/todo_markup.js.git
+$ cd todo_markup.js
 
-# print the help message
-node todo_markup.js help
+$ # print the help message
+$ node todo_markup.js help
 ```
 
 <br />
@@ -61,35 +61,35 @@ There are currently three options for running `todo_markup.js` against your file
 - Create HTML from a todo file
 
 ```console
-# the command below will print html to the console
-node todo_markup.js todo.tdx html
+$ # the command below will print html to the console
+$ node todo_markup.js todo.tdx html
 
-# pass a filename to save the output
-node todo_markup.js todo.tdx html notes.html
+$ # pass a filename to save the output
+$ node todo_markup.js todo.tdx html notes.html
 ```
 
 - Output incomplete tasks as markdown
 
 ```console
-node todo_markup.js todo.tdx incomplete [outputfile]
+$ node todo_markup.js todo.tdx incomplete [outputfile]
 ```
 
 - Output completed tasks as markdown
 
 ```console
-node todo_markup.js todo.tdx done [outputfile]
+$ node todo_markup.js todo.tdx done [outputfile]
 ```
 
 - Output all tasks as markdown
 
 ```console
-node todo_markup.js todo.tdx alltasks [outputfile]
+$ node todo_markup.js todo.tdx alltasks [outputfile]
 ```
 
 - Print a minimal [Abstract Syntax Tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree) for todo file
 
 ```console
-node todo_markup.js todo.tdx ast
+$ node todo_markup.js todo.tdx ast
 ```
 
 Note: `outputfile` is optional for all available commands
