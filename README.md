@@ -195,7 +195,7 @@ Compiled file produces the following HTML formatted text by default:
 Bare urls can be linked using the carrot operator `^`. Urls may appear in any other line regardless of other syntax on that line.
 
 ```txt
-It is important to check the file located at ^https://fileserver.com/important.txt for future updates.
+Find future updates at ^https://example.com/important.txt.
 ```
 
 <br />
