@@ -104,7 +104,7 @@ When creating todo files for use with `todo_markup.js` you must adhere to the fo
 - Operators must be followed by a single space
 - Only one operator can be placed on a single line
 
-> ![NOTE]
+> [!NOTE]
 > Links are the only exception to these rules. See the Links section below
 
 <br />
