@@ -1,6 +1,6 @@
 # todo_markup.js
 
-> A simple todo-focused markup for textual notes
+> A minimal todo-focused markup for textual notes
 
 <br />
 
@@ -20,7 +20,6 @@ This markup is currently a replacement for [markdown](https://learnxinyminutes.c
 - Output complete and / or incomplete tasks as standalone markdown files.
 - Generate an AST-like json object.
 
-
 See [todo.tdx](./todo.tdx) for an example of this markup.
 
 You can use the [demo app](https://www.unforswearing.com/todo_markup/) to test the markup in a live environment.
@@ -38,7 +37,7 @@ You can use the [demo app](https://www.unforswearing.com/todo_markup/) to test t
 
 ## Installation
 
-```bash
+```console
 git clone https://github.com/unforswearing/todo_markup.js.git
 cd todo_markup.js
 
@@ -54,7 +53,7 @@ There are currently three options for running `todo_markup.js` against your file
 
 - Create HTML from a todo file
 
-```txt
+```console
 # the command below will print html to the console
 node todo_markup.js todo.tdx html
 
@@ -64,25 +63,25 @@ node todo_markup.js todo.tdx html notes.html
 
 - Output incomplete tasks as markdown
 
-```txt
+```console
 node todo_markup.js todo.tdx incomplete [outputfile]
 ```
 
 - Output completed tasks as markdown
 
-```txt
+```console
 node todo_markup.js todo.tdx done [outputfile]
 ```
 
 - Output all tasks as markdown
 
-```txt
+```console
 node todo_markup.js todo.tdx alltasks [outputfile]
 ```
 
 - Print a minimal [Abstract Syntax Tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree) for todo file
 
-```txt
+```console
 node todo_markup.js todo.tdx ast
 ```
 
@@ -170,11 +169,15 @@ Compiled file produces the following HTML formatted text by default:
 <div style="background-color: f0f0f0">
 See Footnote [<a id="fnsrc-0" href="#fn-0">0</a>]
 
-<details>
-<summary>Footnotes</summary>
-<br />
-[<a id="fn-0" href="#src">0</a>]: Footnotes are displayed within a details tag.
-</details>
+  <details>
+
+    <summary>Footnotes</summary>
+    <br />
+
+    [<a id="fn-0" href="#src">0</a>]: Footnotes are displayed within a details tag.
+
+  </details>
+
 </div>
 ```
 
