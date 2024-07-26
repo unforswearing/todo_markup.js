@@ -22,20 +22,19 @@ This markup is currently a replacement for [markdown](https://learnxinyminutes.c
 
 See [todo.tdx](./todo.tdx) for an example of this markup.
 
-You can use the [demo app](https://www.unforswearing.com/todo_markup/) to test the markup in a live environment.
-
 <br />
 
-## Todo
+## To Do / Roadmap
 
-- Output other elements to the console or file (notes, highlights, urls).
-- Output or save full Todo file as Markdown instead of HTML.
-- Minimal date parsing for incomplete tasks to indicate overdue items.
-- Come up with a name that is easier to type than `todo_markup.js` (maybe `tdjs`?).
+See [Issues](/issues) for planned features and fixes
 
 <br />
 
 ## Installation
+
+You can use the [demo app](https://www.unforswearing.com/todo_markup/) to test the markup in a live environment.
+
+Clone this repository if you would like to install `todo_markup.js` on your system:
 
 ```console
 git clone https://github.com/unforswearing/todo_markup.js.git
