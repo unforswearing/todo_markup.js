@@ -56,7 +56,8 @@ node todo_markup.js help
 
 ## Usage
 
-There are currently three options for running `todo_markup.js` against your files:
+> [!NOTE]
+> `[outputfile]` is optional for all available commands
 
 - Create HTML from a todo file
 
@@ -91,11 +92,6 @@ node todo_markup.js todo.tdx alltasks [outputfile]
 ```bash
 node todo_markup.js todo.tdx ast
 ```
-
-<br />
-
-> [!NOTE]
-> `outputfile` is optional for all available commands
 
 <br />
 
@@ -136,16 +132,14 @@ Sub-headings can be used to separate projects.
 
 ### Incomplete Todo
 
+> [!NOTE]
+> `todo_markup.js` does not have an operator for pending or backlog type tasks to keep focused on current work.
+
 Incomplete Todo items are prepended with an exclamation point `!`. No need for square brackets `[]`
 
 ```txt
 ! This is an item that needs to be done
 ```
-
-<br />
-
-> [!NOTE]
-> `todo_markup.js` does not have an operator for pending or backlog type tasks to keep focused on current work.
 
 <br />
 
