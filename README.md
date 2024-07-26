@@ -44,12 +44,12 @@ You can use the [demo app](https://www.unforswearing.com/todo_markup/) to test t
 
 Clone this repository if you would like to install `todo_markup.js` on your system:
 
-```console
-$ git clone https://github.com/unforswearing/todo_markup.js.git
-$ cd todo_markup.js
+```bash
+git clone https://github.com/unforswearing/todo_markup.js.git
+cd todo_markup.js
 
-$ # print the help message
-$ node todo_markup.js help
+# print the help message
+node todo_markup.js help
 ```
 
 <br />
@@ -60,36 +60,36 @@ There are currently three options for running `todo_markup.js` against your file
 
 - Create HTML from a todo file
 
-```console
+```bash
 $ # the command below will print html to the console
-$ node todo_markup.js todo.tdx html
+node todo_markup.js todo.tdx html
 
-$ # pass a filename to save the output
-$ node todo_markup.js todo.tdx html notes.html
+# pass a filename to save the output
+node todo_markup.js todo.tdx html notes.html
 ```
 
 - Output incomplete tasks as markdown
 
-```console
-$ node todo_markup.js todo.tdx incomplete [outputfile]
+```bash
+node todo_markup.js todo.tdx incomplete [outputfile]
 ```
 
 - Output completed tasks as markdown
 
-```console
-$ node todo_markup.js todo.tdx done [outputfile]
+```bash
+node todo_markup.js todo.tdx done [outputfile]
 ```
 
 - Output all tasks as markdown
 
-```console
-$ node todo_markup.js todo.tdx alltasks [outputfile]
+```bash
+node todo_markup.js todo.tdx alltasks [outputfile]
 ```
 
 - Print a minimal [Abstract Syntax Tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree) for todo file
 
-```console
-$ node todo_markup.js todo.tdx ast
+```bash
+node todo_markup.js todo.tdx ast
 ```
 
 Note: `outputfile` is optional for all available commands
@@ -112,7 +112,7 @@ When creating todo files for use with `todo_markup.js` you must adhere to the fo
 
 Top level headings are the same as markdown
 
-```markdown
+```txt
 # Here is a Document Title
 ```
 
@@ -204,7 +204,7 @@ It is important to check the file located at ^https://fileserver.com/important.t
 
 Highlights are used to add emphasis a specific line of text that is particularly important. Currently the highlight is the only available text formatting option. Compiled highlights use the "mark" tag.
 
-```markdown
+```txt
 > Please note: Highlights use the default yellow color
 > supported by the HTML `<mark>` tag
 ```
