@@ -92,7 +92,10 @@ node todo_markup.js todo.tdx alltasks [outputfile]
 node todo_markup.js todo.tdx ast
 ```
 
-Note: `outputfile` is optional for all available commands
+<br />
+
+> [!NOTE]
+> `outputfile` is optional for all available commands
 
 <br />
 
@@ -103,6 +106,8 @@ When creating todo files for use with `todo_markup.js` you must adhere to the fo
 - All operators must be placed at the beginning of the line
 - Operators must be followed by a single space
 - Only one operator can be placed on a single line
+
+<br />
 
 > [!NOTE]
 > Links are the only exception to these rules. See the Links section below
@@ -137,7 +142,10 @@ Incomplete Todo items are prepended with an exclamation point `!`. No need for s
 ! This is an item that needs to be done
 ```
 
-> Note: todo_markup.js does not have an operator for pending or backlog type tasks to keep focused on current work.
+<br />
+
+> [!NOTE]
+> `todo_markup.js` does not have an operator for pending or backlog type tasks to keep focused on current work.
 
 <br />
 
