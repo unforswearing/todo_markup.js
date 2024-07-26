@@ -14,7 +14,15 @@ This markup is currently a replacement for [markdown](https://learnxinyminutes.c
 
 ## Features
 
-- Syntax is only 8 operators.
+- Syntax is 8 operators
+  - `#` Heading
+  - `=` Sub-heading
+  - `!` Incomplete Todo
+  - `x` Completed Todo
+  - `%` Comment
+  - `@` Footnote
+  - `^` Url
+  - `>` Highlight
 - The todo file is line based -- there is no nested todo grammar aside from URLs.
 - Output or save HTML from various options.
 - Output complete and / or incomplete tasks as standalone markdown files.
