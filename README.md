@@ -174,7 +174,7 @@ Compiled file produces the following HTML formatted text by default:
 
 ```html
 <div style="background-color: f0f0f0">
-See Footnote [<a id="fnsrc-0" href="#fn-0">0</a>]
+  See Footnote [<a id="fnsrc-0" href="#fn-0">0</a>]
 
   <details>
 
