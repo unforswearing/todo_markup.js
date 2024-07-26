@@ -61,7 +61,7 @@ There are currently three options for running `todo_markup.js` against your file
 - Create HTML from a todo file
 
 ```bash
-$ # the command below will print html to the console
+# the command below will print html to the console
 node todo_markup.js todo.tdx html
 
 # pass a filename to save the output
