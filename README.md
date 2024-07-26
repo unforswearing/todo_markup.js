@@ -57,7 +57,7 @@ node todo_markup.js help
 ## Usage
 
 > [!NOTE]
-> `[outputfile]` is optional for all available commands
+> `[outputfile]` is optional for all available commands.
 
 - Create HTML from a todo file
 
@@ -106,7 +106,7 @@ When creating todo files for use with `todo_markup.js` you must adhere to the fo
 <br />
 
 > [!NOTE]
-> Links are the only exception to these rules. See the Links section below
+> Links are the only exception to these rules. See the Links section below.
 
 <br />
 
